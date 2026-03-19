@@ -115,6 +115,7 @@
 | 2026-03-19 | Chose Fraunces + DM Sans over all-sans typography | Differentiates from competitors (all use sans-serif). Fraunces gives editorial sophistication, DM Sans handles data/UI beautifully. |
 | 2026-03-19 | Chose amber accent over teal/green | Breaks from ed-tech visual conventions (everyone uses cool colors). Amber = warmth + motivation, psychologically energizing. |
 | 2026-03-19 | Intentional motion (not minimal) | Students expect polished apps (TikTok, Notion). Static feels dated. BUT: no animations on practice question screens to preserve focus. |
+| 2026-03-19 | Polish design + add bottom navigation | Redesigned Question Screen with better progress visualization (gradient bar, clearer title). Redesigned Results Screen with celebration-style score card (trophy icon, white text on blue). Added bottom tab navigation to Home Dashboard for easier app navigation. (Bailey) |
 
 ---
 
