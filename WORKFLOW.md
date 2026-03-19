@@ -12,11 +12,10 @@
 ```
 master (production-ready, protected)
   │
-  ├── develop (integration branch, protected)
+  ├── develop (integration branch)
   │     │
   │     ├── feature/* (Huy: Implementation work)
-  │     ├── design/* (Bailey: Design updates)
-  │     └── docs/* (Bailey: Requirement/architecture updates)
+  │     └── docs/* (Bailey: Requirement/architecture updates - only when needs discussion)
 ```
 
 ### Branch Types
@@ -24,87 +23,71 @@ master (production-ready, protected)
 | Branch Prefix | Owner | Purpose | Example |
 |--------------|-------|---------|---------|
 | `feature/*` | Huy | New features, bug fixes | `feature/login-screen` |
-| `design/*` | Bailey | Pencil file updates, design changes | `design/update-login-colors` |
-| `docs/*` | Bailey | Requirements, architecture changes | `docs/add-social-login` |
+| `docs/*` | Bailey | Major requirements/architecture changes that need discussion | `docs/add-social-login` |
+
+**Note:** Bailey commits design updates directly to `develop` (no branches). Only branch for major breaking changes or when Huy explicitly requests it.
 
 ---
 
 ## Bailey's Workflow: Updating Designs
 
-### Scenario: You want to update the Pencil design file
+### Simplified Workflow (No Branches!)
 
-**Step 1: Create a design branch**
-```bash
-git checkout develop
-git pull origin develop
-git checkout -b design/update-login-screen
+**You (Bailey):**
+1. Open `sat-prep-mobile.pen` in Pencil.dev
+2. Make your design changes
+3. Save the file
+4. Tell Claude: **"Push design: [brief description]"**
+
+**Claude automatically:**
+- ✅ Stages `sat-prep-mobile.pen` and related files
+- ✅ Updates `DESIGN.md` decision log (if significant)
+- ✅ Commits with detailed message including screen IDs, changes, and impact on Huy
+- ✅ Pushes directly to `develop`
+- ✅ Notifies you with commit hash
+
+**No branches, no PRs, no overhead.** Huy will get your changes when he runs `git pull origin develop`.
+
+### Example
+
+```
+You: "Push design: Changed login button to darker blue"
+
+Claude:
+[Executes automatically]
+✅ Staged sat-prep-mobile.pen
+✅ Updated DESIGN.md decision log
+✅ Committed: "Design: Change login button to darker blue
+
+Screen: 7WE8A - Login Screen
+Changed primary button #2563EB → #1D4ED8 for better contrast (WCAG AA)
+
+Impact on Huy:
+- Update lib/core/constants/app_colors.dart primaryBlue constant
+- Estimated effort: 5 minutes"
+
+✅ Pushed to origin/develop
+📌 Commit: abc1234
+
+🔔 Huy will see this on next git pull
 ```
 
-**Step 2: Make changes to Pencil file**
-- Open `sat-prep-mobile.pen` in Pencil.dev
-- Make design changes (e.g., update colors, spacing, add elements)
-- Save the file
+### When to Branch (Rare Exceptions)
 
-**Step 3: Export screenshots for review**
-```bash
-# Take screenshots of changed screens
-# Save to images/design-updates/
-mkdir -p images/design-updates
-# Export screens from Pencil as PNG
-```
+Only create `design/*` branches when:
 
-**Step 4: Document changes**
-Update `DESIGN.md` with a new entry in the Decisions Log:
-```markdown
-| 2026-03-20 | Updated login screen button colors | Changed primary button from #2563EB to #1D4ED8 for better contrast (Bailey) |
-```
+1. **Huy explicitly requests it**
+   - Example: "I'm halfway through implementing login. Can you branch your changes?"
+   - You: "Branch design: [description]" (Claude creates branch + PR)
 
-**Step 5: Commit and push**
-```bash
-git add sat-prep-mobile.pen DESIGN.md images/design-updates/
-git commit -m "Design update: Updated login screen button colors
+2. **Major breaking redesign**
+   - Complete UI overhaul that invalidates weeks of work
+   - You: "Branch design: Complete redesign of practice flow" (Claude creates branch + PR for discussion)
 
-- Changed primary button from #2563EB to #1D4ED8
-- Updated focus states for better accessibility
-- Added screenshot comparison in images/design-updates/
+3. **Experimental design** (not sure if you'll keep it)
+   - You: "Branch design: Trying minimalist navigation" (Claude creates branch, you can delete if you don't like it)
 
-See DESIGN.md for rationale."
-
-git push -u origin design/update-login-screen
-```
-
-**Step 6: Create Pull Request**
-```bash
-gh pr create \
-  --base develop \
-  --title "Design: Updated login screen button colors" \
-  --body "## Design Changes
-
-### Screens Affected
-- Login Screen (7WE8A)
-
-### Changes
-- Primary button color: #2563EB → #1D4ED8
-- Focus state updated for accessibility
-
-### Screenshots
-Before:
-![Before](images/design-updates/login-before.png)
-
-After:
-![After](images/design-updates/login-after.png)
-
-### Impact on Huy's Work
-- **Action Required**: Update \`app_colors.dart\` primary color constant
-- **Estimated Effort**: 5 minutes
-- **Files to Change**: \`lib/core/constants/app_colors.dart\`
-
-@huy-username Please review and update the Flutter constants accordingly."
-```
-
-**Step 7: Notify Huy**
-- PR automatically tags Huy
-- Slack/email: "Hey Huy, I updated the login button colors. Check PR #X when you get a chance."
+**Default: Just commit directly to develop.**
 
 ---
 
