@@ -101,8 +101,8 @@ ui-debug.log
 # Dependencies
 node_modules/
 yarn-error.log
-package-lock.json
 yarn.lock
+.next/
 
 # Temporary files
 tmp/
@@ -112,3 +112,4 @@ temp/
 # OS-specific
 Thumbs.db
 Desktop.ini
+.gstack/
