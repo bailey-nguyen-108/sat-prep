@@ -21,6 +21,7 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
   );
   const remainingCount = session.questions.length - answeredCount;
   const progressWidth = `${Math.round(((currentIndex + 1) / session.questions.length) * 100)}%`;
+  const timerValue = session.mode === "timed" ? "11:42" : "Focus mode";
 
   return (
     <>
@@ -37,19 +38,18 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
             <div className="progress-fill" style={{ width: progressWidth }} />
           </div>
           <p className="page-subtitle">
-            Stay focused, answer what you can, and submit when the full block feels solid.
+            You&apos;re on pace. Keep your focus on solving before checking choices.
           </p>
         </div>
+        <article className="card timer-card">
+          <p className="stat-label">Time remaining</p>
+          <p className="stat-value">{timerValue}</p>
+        </article>
       </div>
 
       <section className="session-layout">
         <article className="card question-card">
-          <div>
-            <p className="stat-label" style={{ marginBottom: 12 }}>
-              {currentQuestion.subtopic}
-            </p>
-            <p className="question-prompt">{currentQuestion.prompt}</p>
-          </div>
+          <p className="question-prompt">{currentQuestion.prompt}</p>
 
           {choiceKeys.map((choiceKey) => {
             const label =
@@ -76,37 +76,18 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
             );
           })}
 
-          <div className="card" style={{ background: "var(--color-bg)", padding: 20 }}>
+          <div className="session-hint">
             <p className="page-subtitle" style={{ margin: 0 }}>
-              Pick your best answer now. You&apos;ll see explanations after the full session is
-              submitted.
+              Tip: {currentQuestion.explanation.split(".")[0].replace(/^Because\s+/i, "")}.
             </p>
           </div>
         </article>
 
         <aside className="session-rail">
-          <article className="card rail-card rail-card-compact">
-            <p className="stat-label">Session snapshot</p>
-            <p className="rail-stat">
-              {answeredCount}/{session.questions.length}
-            </p>
-            <p className="page-subtitle">Questions answered so far in this block.</p>
-            <div className="session-mini-grid">
-              <div className="session-mini-card">
-                <span className="session-mini-label">Remaining</span>
-                <strong>{remainingCount}</strong>
-              </div>
-              <div className="session-mini-card">
-                <span className="session-mini-label">Mode</span>
-                <strong>{session.mode === "timed" ? "Timed" : "Untimed"}</strong>
-              </div>
-            </div>
-          </article>
-
           <article className="card rail-card">
             <h2 className="card-title rail-title">Question navigator</h2>
             <p className="page-subtitle">
-              Jump around if you want, then submit when you&apos;re ready.
+              Review flagged items after you finish this block.
             </p>
             <div className="nav-badges nav-badges-grid" style={{ marginTop: 16 }}>
               {session.questions.map((question, index) => {
@@ -127,12 +108,8 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
               })}
             </div>
             <p className="stat-label" style={{ marginTop: 16 }}>
-              {answeredCount} answered • {remainingCount} remaining
+              0 flagged • {remainingCount} remaining
             </p>
-            <div className="session-note">
-              Submit when the block is complete. Explanations and weak-area follow-up show up on
-              the results screen.
-            </div>
           </article>
         </aside>
       </section>
@@ -140,23 +117,21 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
       <form action="/student/practice/session/submit" method="post" className="session-footer">
         <input type="hidden" name="sessionId" value={session.id} />
         <input type="hidden" name="answers" value={JSON.stringify(answers)} />
-        <div className="session-footer-copy">
-          <p className="stat-label">Session status</p>
-          <p className="session-footer-title">
-            {answeredCount} answered • {remainingCount} remaining
-          </p>
-        </div>
-        <div className="button-row">
-          <button
-            className="button-secondary"
-            type="button"
-            onClick={() => setCurrentIndex((index) => Math.max(index - 1, 0))}
-            disabled={currentIndex === 0}
-          >
-            Previous question
+        <button
+          className="button-secondary"
+          type="button"
+          onClick={() => setCurrentIndex((index) => Math.max(index - 1, 0))}
+          disabled={currentIndex === 0}
+        >
+          Previous question
+        </button>
+
+        <div className="button-row session-footer-actions">
+          <button className="button-secondary" type="submit">
+            Submit session
           </button>
           <button
-            className="button-secondary"
+            className="button-primary"
             type="button"
             onClick={() =>
               setCurrentIndex((index) => Math.min(index + 1, session.questions.length - 1))
@@ -166,7 +141,6 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
             Next question
           </button>
         </div>
-        <button className="button-primary">Submit session</button>
       </form>
     </>
   );
