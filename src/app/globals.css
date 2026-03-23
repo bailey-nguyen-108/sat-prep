@@ -437,8 +437,8 @@ input {
 
 .session-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 280px;
-  gap: 20px;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 24px;
   align-items: start;
 }
 
@@ -447,6 +447,7 @@ input {
   flex-direction: column;
   gap: 16px;
   padding: 28px;
+  min-height: 560px;
 }
 
 .question-prompt {
@@ -513,10 +514,6 @@ input {
   background: var(--color-primary);
 }
 
-.timer-card {
-  width: 200px;
-}
-
 .metric-card {
   min-height: 116px;
 }
@@ -534,7 +531,7 @@ input {
   min-height: 220px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 18px;
 }
 
 .rail-stat {
@@ -553,8 +550,36 @@ input {
   min-height: 332px;
 }
 
+.rail-card-compact {
+  min-height: auto;
+}
+
 .rail-title {
   max-width: 180px;
+}
+
+.session-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.session-mini-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+}
+
+.session-mini-label {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .nav-badges {
@@ -607,10 +632,61 @@ input {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  padding: 20px 24px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 18px 40px -32px rgba(15, 23, 42, 0.3);
+  position: sticky;
+  bottom: 24px;
 }
 
 .results-actions {
   margin-top: -4px;
+}
+
+.session-footer-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.session-footer-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.05;
+}
+
+.session-note {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.results-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.results-metric {
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.results-metric-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.82;
 }
 
 @media (max-width: 1100px) {
@@ -631,5 +707,14 @@ input {
   .card-grid-2 {
     grid-template-columns: 1fr;
     flex-direction: column;
+  }
+
+  .results-metrics,
+  .session-mini-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .session-footer {
+    position: static;
   }
 }

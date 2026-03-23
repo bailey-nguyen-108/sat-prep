@@ -50,6 +50,20 @@ export default async function SessionResultsPage({
             {session.correct_count ?? 0} / {session.question_count}
           </p>
           <p className="stat-label">{accuracy}% accuracy • stored in Supabase</p>
+          <div className="results-metrics">
+            <div className="results-metric">
+              <span className="results-metric-label">Correct</span>
+              <strong>{session.correct_count ?? 0}</strong>
+            </div>
+            <div className="results-metric">
+              <span className="results-metric-label">Needs review</span>
+              <strong>{session.question_count - (session.correct_count ?? 0)}</strong>
+            </div>
+            <div className="results-metric">
+              <span className="results-metric-label">Weak areas</span>
+              <strong>{session.weak_subtopics.length}</strong>
+            </div>
+          </div>
         </article>
 
         <article className="card dashboard-card">
@@ -74,6 +88,13 @@ export default async function SessionResultsPage({
                 <strong className="text-success">Ready to level up</strong>
               </div>
             )}
+          </div>
+          <div style={{ marginTop: 18 }}>
+            <span className="info-pill">
+              {session.weak_subtopics.length > 0
+                ? "Follow-up set ready"
+                : "No urgent follow-up needed"}
+            </span>
           </div>
         </article>
       </section>
