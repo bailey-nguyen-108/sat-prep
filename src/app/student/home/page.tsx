@@ -17,11 +17,12 @@ export default async function StudentHomePage() {
     0
   );
   const topWeakAreas = latestCompleted?.weak_subtopics ?? [];
+  const streakLabel = currentStreak === 1 ? "session" : "sessions";
 
   return (
     <StudentShell activeTab="home">
       <div className="page-header">
-        <div>
+        <div className="page-hero-copy">
           <h1 className="page-title">Good afternoon, {auth.profile.full_name ?? "Student"}.</h1>
           <p className="page-subtitle">
             {latestCompleted
@@ -35,22 +36,24 @@ export default async function StudentHomePage() {
       </div>
 
       <section className="card-grid-3">
-        <article className="card card-primary">
+        <article className="card card-primary metric-card">
           <p className="stat-label">Current streak</p>
-          <p className="stat-value">{currentStreak} sessions</p>
+          <p className="stat-value">
+            {currentStreak} {streakLabel}
+          </p>
         </article>
-        <article className="card">
+        <article className="card metric-card">
           <p className="stat-label">Latest accuracy</p>
           <p className="stat-value">{accuracy}%</p>
         </article>
-        <article className="card card-accent">
+        <article className="card card-accent metric-card">
           <p className="stat-label">Questions reviewed</p>
           <p className="stat-value">{reviewedCount}</p>
         </article>
       </section>
 
       <section className="card-grid-2">
-        <article className="card">
+        <article className="card dashboard-card">
           <h2 className="card-title">Next best session</h2>
           <p className="page-subtitle">
             {topWeakAreas.length > 0
@@ -61,9 +64,9 @@ export default async function StudentHomePage() {
             <span className="info-pill">Recommended now</span>
           </div>
         </article>
-        <article className="card">
+        <article className="card dashboard-card">
           <h2 className="card-title">Weak areas to revisit</h2>
-          <div className="inline-list">
+          <div className="inline-list list-with-dividers">
             {topWeakAreas.length > 0 ? (
               topWeakAreas.map((topic, index) => (
                 <div className="inline-row" key={topic}>
@@ -84,13 +87,13 @@ export default async function StudentHomePage() {
       </section>
 
       <section className="card-grid-2">
-        <article className="card">
+        <article className="card dashboard-card">
           <h2 className="card-title">Today&apos;s study plan</h2>
           <p className="page-subtitle">
             One 10-question targeted set, then a short review of any misses that show up on the
             results screen.
           </p>
-          <div className="inline-list" style={{ marginTop: 16 }}>
+          <div className="inline-list list-with-dividers" style={{ marginTop: 16 }}>
             <div className="inline-row">
               <span>Targeted Math Set</span>
               <strong style={{ color: "var(--color-primary)" }}>10 questions</strong>
@@ -101,9 +104,9 @@ export default async function StudentHomePage() {
             </div>
           </div>
         </article>
-        <article className="card">
+        <article className="card dashboard-card">
           <h2 className="card-title">Recent sessions</h2>
-          <div className="inline-list">
+          <div className="inline-list list-with-dividers">
             {recentSessions.length > 0 ? (
               recentSessions.slice(0, 3).map((session) => (
                 <div className="inline-row" key={session.id}>

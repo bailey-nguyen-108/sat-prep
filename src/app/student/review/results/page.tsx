@@ -44,7 +44,7 @@ export default async function SessionResultsPage({
       </div>
 
       <section className="card-grid-2">
-        <article className="card card-primary">
+        <article className="card card-primary score-card">
           <p className="stat-label">Session score</p>
           <p className="stat-value" style={{ fontSize: 52 }}>
             {session.correct_count ?? 0} / {session.question_count}
@@ -52,13 +52,13 @@ export default async function SessionResultsPage({
           <p className="stat-label">{accuracy}% accuracy • stored in Supabase</p>
         </article>
 
-        <article className="card">
+        <article className="card dashboard-card">
           <h2 className="card-title">Weak-area follow-up</h2>
           <p className="page-subtitle">
             We found the sub-topics that missed most often. Your next recommended session can pull
             approved bank questions from those areas.
           </p>
-          <div className="inline-list" style={{ marginTop: 16 }}>
+          <div className="inline-list list-with-dividers" style={{ marginTop: 16 }}>
             {session.weak_subtopics.length > 0 ? (
               session.weak_subtopics.map((topic, index) => (
                 <div className="inline-row" key={topic}>
@@ -78,7 +78,7 @@ export default async function SessionResultsPage({
         </article>
       </section>
 
-      <div className="button-row" style={{ justifyContent: "flex-start" }}>
+      <div className="button-row results-actions" style={{ justifyContent: "flex-start" }}>
         <Link className="button-primary" href="/student/practice/setup">
           Practice weak areas
         </Link>
@@ -88,9 +88,9 @@ export default async function SessionResultsPage({
       </div>
 
       <section className="card-grid-2">
-        <article className="card">
+        <article className="card dashboard-card">
           <h2 className="card-title">Question breakdown</h2>
-          <div className="inline-list">
+          <div className="inline-list list-with-dividers">
             {session.questions.slice(0, 6).map((question) => (
               <div className="inline-row" key={question.id}>
                 <span>
@@ -104,7 +104,7 @@ export default async function SessionResultsPage({
           </div>
         </article>
 
-        <article className="card">
+        <article className="card dashboard-card">
           <h2 className="card-title">Momentum outlook</h2>
           <p className="page-subtitle">
             {session.weak_subtopics.length > 0

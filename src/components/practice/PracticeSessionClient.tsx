@@ -24,7 +24,7 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
   return (
     <>
       <div className="page-header">
-        <div style={{ width: "min(760px, 100%)" }}>
+        <div className="page-hero-copy" style={{ width: "min(760px, 100%)" }}>
           <p className="stat-label" style={{ color: "var(--color-primary)", marginBottom: 8 }}>
             {session.subject === "math" ? "Math" : "Reading & Writing"} •{" "}
             {session.mode === "timed" ? "Timed practice" : "Untimed practice"}
@@ -53,7 +53,7 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
             <p className="stat-label" style={{ marginBottom: 12 }}>
               {currentQuestion.subtopic}
             </p>
-            <p style={{ fontSize: 28, lineHeight: 1.45, margin: 0 }}>{currentQuestion.prompt}</p>
+            <p className="question-prompt">{currentQuestion.prompt}</p>
           </div>
 
           {choiceKeys.map((choiceKey) => {
@@ -73,8 +73,10 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
                   }))
                 }
               >
-                <strong>{choiceKey}</strong>
-                <span>{label}</span>
+                <span className={`choice-badge ${active ? "choice-badge-active" : ""}`}>
+                  {choiceKey}
+                </span>
+                <span className="choice-copy">{label}</span>
               </button>
             );
           })}
@@ -87,11 +89,20 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
           </div>
         </article>
 
-        <aside className="card">
-          <h2 className="card-title" style={{ fontSize: 24 }}>
-            Question navigator
-          </h2>
-          <p className="page-subtitle">Jump around if you want, then submit when you&apos;re ready.</p>
+        <aside className="session-rail">
+          <article className="card">
+            <p className="stat-label">Completion</p>
+            <p className="rail-stat">
+              {answeredCount}/{session.questions.length}
+            </p>
+            <p className="page-subtitle">Questions answered so far in this block.</p>
+          </article>
+
+          <article className="card rail-card">
+            <h2 className="card-title rail-title">Question navigator</h2>
+            <p className="page-subtitle">
+              Jump around if you want, then submit when you&apos;re ready.
+            </p>
           <div className="nav-badges nav-badges-grid" style={{ marginTop: 16 }}>
             {session.questions.map((question, index) => {
               const isActive = index === currentIndex;
@@ -110,39 +121,37 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
               );
             })}
           </div>
-          <p className="stat-label" style={{ marginTop: 14 }}>
-            {answeredCount} answered • {session.questions.length - answeredCount} remaining
-          </p>
+            <p className="stat-label" style={{ marginTop: 16 }}>
+              {answeredCount} answered • {session.questions.length - answeredCount} remaining
+            </p>
+          </article>
         </aside>
       </section>
 
-      <div className="button-row">
-        <button
-          className="button-secondary"
-          type="button"
-          onClick={() => setCurrentIndex((index) => Math.max(index - 1, 0))}
-          disabled={currentIndex === 0}
-        >
-          Previous question
-        </button>
-        <button
-          className="button-secondary"
-          type="button"
-          onClick={() =>
-            setCurrentIndex((index) => Math.min(index + 1, session.questions.length - 1))
-          }
-          disabled={currentIndex === session.questions.length - 1}
-        >
-          Next question
-        </button>
-      </div>
-
-      <form action="/student/practice/session/submit" method="post">
+      <form action="/student/practice/session/submit" method="post" className="session-footer">
         <input type="hidden" name="sessionId" value={session.id} />
         <input type="hidden" name="answers" value={JSON.stringify(answers)} />
-        <button className="button-primary" style={{ alignSelf: "flex-end" }}>
-          Submit session
-        </button>
+        <div className="button-row">
+          <button
+            className="button-secondary"
+            type="button"
+            onClick={() => setCurrentIndex((index) => Math.max(index - 1, 0))}
+            disabled={currentIndex === 0}
+          >
+            Previous question
+          </button>
+          <button
+            className="button-secondary"
+            type="button"
+            onClick={() =>
+              setCurrentIndex((index) => Math.min(index + 1, session.questions.length - 1))
+            }
+            disabled={currentIndex === session.questions.length - 1}
+          >
+            Next question
+          </button>
+        </div>
+        <button className="button-primary">Submit session</button>
       </form>
     </>
   );
