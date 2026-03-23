@@ -44,6 +44,26 @@ All font choices, colors, spacing, and aesthetic direction are defined in DESIGN
 
 In QA mode, flag any code that doesn't match DESIGN.md.
 
+## Design Source Of Truth
+
+For frontend implementation and `/design-review` in this repo, `sat-prep-webapp.pen` is the
+screen-spec source of truth for layout, section order, content density, CTA placement, and
+navigation consistency.
+
+When both files exist:
+- `DESIGN.md` defines the visual system: typography, color, spacing scale, motion, and overall
+  aesthetic direction.
+- `sat-prep-webapp.pen` defines the actual screen composition to implement.
+
+Before implementing or reviewing any student-facing screen:
+1. Read `DESIGN.md`
+2. Read `sat-prep-webapp.pen`
+3. Compare the coded screen against the `.pen` file first
+4. Treat mismatches from the `.pen` file as design bugs, not optional polish
+
+Do not mark a screen as "good" if it looks polished but does not match the approved `.pen`
+layout.
+
 ## Design Update Workflow
 
 **Bailey (the user) is the PM/Designer.** When Bailey updates Pencil designs and says:

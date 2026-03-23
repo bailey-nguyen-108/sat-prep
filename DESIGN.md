@@ -1,15 +1,15 @@
 # Design System — SAT Prep App
 
 ## Product Context
-- **What this is:** SAT prep application with Flutter mobile app (iOS & Android) for students and React/Next.js web dashboard for teachers and admins
+- **What this is:** SAT prep responsive web application (Next.js) for all roles: students, teachers, and school administrators
 - **Who it's for:** High school students preparing for the SAT, their teachers, and school administrators
 - **Space/industry:** Educational technology / Test prep (competing with Khan Academy SAT prep, Bluebook, Magoosh)
-- **Project type:** Mobile app (student practice sessions) + web dashboard (admin/teacher management)
+- **Project type:** Responsive web app (mobile & desktop) — student practice sessions, teacher/admin dashboards, data visualization
 
 ## Aesthetic Direction
-- **Direction:** Refined Utility
-- **Decoration level:** Intentional (subtle texture like light paper grain, gentle gradients for depth — never garish purple AI slop gradients)
-- **Mood:** Premium study tool that respects both the seriousness of the SAT and the fact that teenagers are using it. Thoughtfully minimal with intentional moments of warmth. Feels credible but not boring, focused but not sterile.
+- **Direction:** Bold Modern SaaS
+- **Decoration level:** Balanced — Color is used confidently for data visualization and hierarchy. Dark sidebar/light content split creates visual interest.
+- **Mood:** Confident, modern, colorful without being juvenile. Inspired by best-in-class project management and analytics tools. Uses bold colors (coral red, bright blue) for stats and metrics. Feels professional and trustworthy while being visually engaging.
 - **Reference sites:**
   - [Khan Academy SAT Prep](https://www.khanacademy.org/digital-sat) — clean, minimal, slightly generic
   - [Bluebook](https://bluebook.collegeboard.org/) — official testing interface, very neutral
@@ -35,28 +35,34 @@
   - `6xl`: 60px / 3.75rem
 
 ## Color
-- **Approach:** Restrained with personality — Color is rare and meaningful. Blue + amber breaks from the cold teal/green palette dominating ed-tech.
-- **Primary:** `#2563EB` — Confident, serious blue (not corporate cobalt, not playful sky). Use for CTAs, links, primary actions, focus states.
-- **Accent:** `#F59E0B` — Warm amber for progress indicators, achievements, streaks, upgrade prompts. Psychologically energizing without being aggressive. This is your differentiator — the warmth that breaks from the cold ed-tech palette.
+- **Approach:** Balanced & Bold — Color is used confidently for data visualization, stat cards, and hierarchy. Inspired by modern SaaS dashboards (Linear, Notion, Vercel). Blue + coral/red create visual interest without being garish.
+- **Primary:** `#42A5F5` — Bright, confident blue. Use for primary stat cards, CTAs, links, active states, progress indicators. More saturated than traditional ed-tech blues — we're not boring.
+- **Accent/Alert:** `#EF5350` — Coral red for important metrics, secondary stat cards, alerts, warnings. Used boldly in data visualization. Not aggressive, but confident.
 - **Neutrals:**
-  - Warm grays (cream-tinted, never pure white/black)
-  - Lightest: `#FAFAF9` (bg-base)
-  - Surface: `#FFFFFF` (cards, modals)
-  - Border: `#E4E4E7`
-  - Text primary: `#18181B`
-  - Text secondary: `#52525B`
-  - Text tertiary: `#A1A1AA`
-  - Darkest: `#18181B`
+  - Cool grays (blue-tinted for modernity)
+  - Lightest: `#F8FAFC` (bg-base for light areas)
+  - Surface: `#FFFFFF` (cards, modals, main content)
+  - Border: `#E2E8F0`
+  - Text primary: `#0F172A`
+  - Text secondary: `#475569`
+  - Text tertiary: `#94A3B8`
+  - Darkest: `#1A1A1A` (sidebar, dark surfaces)
 - **Semantic:**
   - Success: `#10B981` (emerald green for correct answers, achievements)
-  - Warning: `#F59E0B` (reuse accent amber for paywall warnings, session limits)
-  - Error: `#EF4444` (red for incorrect answers, validation errors)
-  - Info: `#3B82F6` (lighter blue for informational messages)
-- **Dark mode strategy:**
-  - Redesign surfaces (don't just invert colors)
-  - Navy-black backgrounds: `#0F172A` (base), `#1E293B` (surface)
-  - Reduce saturation 15% on primary/accent colors: Primary → `#3B82F6`, Accent → `#FBBF24`
-  - Lighten text: `#F8FAFC` (primary), `#CBD5E1` (secondary), `#64748B` (tertiary)
+  - Warning: `#F59E0B` (amber for paywall warnings, session limits)
+  - Error: `#DC2626` (red for incorrect answers, validation errors)
+  - Info: `#0284C7` (cyan for informational messages)
+- **Dark surfaces (sidebar/navigation):**
+  - Use dark mode aesthetic for sidebars and navigation ALWAYS (even in "light mode")
+  - Sidebar background: `#1A1A1A` (almost black)
+  - Sidebar hover: `#2A2A2A`
+  - Sidebar active: `#3A3A3A` with primary color accent
+  - Main content stays light (`#FFFFFF` background)
+  - This creates the modern split-layout aesthetic (dark nav, light content)
+- **Full dark mode strategy (optional user toggle):**
+  - Base: `#0F172A`, Surface: `#1E293B`
+  - Reduce saturation 10% on primary/accent: Primary → `#64B5F6`, Accent → `#EF5350` (stays bold)
+  - Text: `#F1F5F9` (primary), `#CBD5E1` (secondary), `#64748B` (tertiary)
   - Border: `#334155`
 
 ## Spacing
@@ -116,6 +122,8 @@
 | 2026-03-19 | Chose amber accent over teal/green | Breaks from ed-tech visual conventions (everyone uses cool colors). Amber = warmth + motivation, psychologically energizing. |
 | 2026-03-19 | Intentional motion (not minimal) | Students expect polished apps (TikTok, Notion). Static feels dated. BUT: no animations on practice question screens to preserve focus. |
 | 2026-03-19 | Polish design + add bottom navigation | Redesigned Question Screen with better progress visualization (gradient bar, clearer title). Redesigned Results Screen with celebration-style score card (trophy icon, white text on blue). Added bottom tab navigation to Home Dashboard for easier app navigation. (Bailey) |
+| 2026-03-20 | Pivoted to responsive web app (all roles) | Changed from mobile-first (Flutter) to Next.js responsive web app for students, teachers, and admins. Updated architecture from ARCHITECTURE.md. |
+| 2026-03-20 | Updated to bold modern SaaS aesthetic | Changed accent from amber to coral red (#EF5350), primary to bright blue (#42A5F5). Added dark sidebar/light content split aesthetic. Inspired by modern project management tools. Bailey's preference for bold, colorful stat cards and confident data visualization over restrained palette. |
 
 ---
 
