@@ -50,17 +50,13 @@ export default async function LoginPage({
           <div>
             <h2 className="card-title">Welcome back</h2>
             <p className="page-subtitle">
-              Sign in to continue, or create a student account and try the full flow right away.
+              Pick up where you left off and start a focused practice block.
             </p>
           </div>
 
           {errorMessage ? <p className="error-banner">{errorMessage}</p> : null}
 
           <form className="field-stack" method="post">
-            <div className="field">
-              <label htmlFor="fullName">Full name</label>
-              <input id="fullName" name="fullName" className="input" placeholder="Bailey Nguyen" />
-            </div>
             <div className="field">
               <label htmlFor="email">Email</label>
               <input
@@ -69,6 +65,7 @@ export default async function LoginPage({
                 className="input"
                 type="email"
                 defaultValue="student@school.edu"
+                placeholder="student@school.edu"
                 required
               />
             </div>
@@ -85,18 +82,17 @@ export default async function LoginPage({
             </div>
 
             <div className="meta-row">
-              <span className="muted-copy">Use one email for both sign-up and sign-in.</span>
-              <span className="muted-link">Local setup uses auto-confirmed accounts</span>
+              <span className="muted-copy">Keep me signed in</span>
+              <span className="muted-link">Forgot password?</span>
             </div>
 
-            <div className="button-stack">
-              <button className="button-primary" formAction="/auth/sign-in">
-                Continue to dashboard
-              </button>
-              <button className="button-secondary" formAction="/auth/sign-up">
-                Create student account
-              </button>
-            </div>
+            <button className="button-primary" formAction="/auth/sign-in">
+              Continue to dashboard
+            </button>
+
+            <button className="auth-footer-action" formAction="/auth/sign-up">
+              New here? Create a student account in under 60 seconds.
+            </button>
           </form>
         </div>
       </section>

@@ -331,6 +331,17 @@ input {
   gap: 12px;
 }
 
+.auth-footer-action {
+  border: 0;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+  cursor: pointer;
+  padding: 0;
+}
+
 .field {
   display: flex;
   flex-direction: column;
