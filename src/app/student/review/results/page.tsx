@@ -29,6 +29,8 @@ export default async function SessionResultsPage({
   const accuracy = session.question_count
     ? Math.round(((session.correct_count ?? 0) / session.question_count) * 100)
     : 0;
+  const needsReviewCount = session.question_count - (session.correct_count ?? 0);
+  const weakAreaCount = session.weak_subtopics.length || 1;
 
   return (
     <StudentShell activeTab="review">
@@ -50,6 +52,26 @@ export default async function SessionResultsPage({
             {session.correct_count ?? 0} / {session.question_count}
           </p>
           <p className="stat-label">{accuracy}% accuracy • best pace this week</p>
+          <div className="results-metrics">
+            <div className="results-metric">
+              <span className="results-metric-label">Correct</span>
+              <strong className="stat-value" style={{ fontSize: 24 }}>
+                {session.correct_count ?? 0}
+              </strong>
+            </div>
+            <div className="results-metric">
+              <span className="results-metric-label">Review</span>
+              <strong className="stat-value" style={{ fontSize: 24 }}>
+                {needsReviewCount}
+              </strong>
+            </div>
+            <div className="results-metric">
+              <span className="results-metric-label">Weak areas</span>
+              <strong className="stat-value" style={{ fontSize: 24 }}>
+                {weakAreaCount}
+              </strong>
+            </div>
+          </div>
         </article>
 
         <article className="card dashboard-card">

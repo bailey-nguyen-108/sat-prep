@@ -19,9 +19,11 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
     () => Object.values(answers).filter(Boolean).length,
     [answers]
   );
+  const flaggedCount = 0;
   const remainingCount = session.questions.length - answeredCount;
   const progressWidth = `${Math.round(((currentIndex + 1) / session.questions.length) * 100)}%`;
   const timerValue = session.mode === "timed" ? "11:42" : "Focus mode";
+  const isLastQuestion = currentIndex === session.questions.length - 1;
 
   return (
     <>
@@ -108,8 +110,23 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
               })}
             </div>
             <p className="stat-label" style={{ marginTop: 16 }}>
-              0 flagged • {remainingCount} remaining
+              {flaggedCount} flagged • {remainingCount} remaining
             </p>
+            <div className="session-rail-snapshot">
+              <p className="session-rail-snapshot-title">Session snapshot</p>
+              <div className="inline-row">
+                <span>Answered</span>
+                <strong style={{ color: "var(--color-primary)" }}>{answeredCount}</strong>
+              </div>
+              <div className="inline-row">
+                <span>Flagged</span>
+                <strong className="text-accent">{flaggedCount}</strong>
+              </div>
+              <div className="inline-row">
+                <span>Remaining</span>
+                <strong>{remainingCount}</strong>
+              </div>
+            </div>
           </article>
         </aside>
       </section>
@@ -126,21 +143,21 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
           Previous question
         </button>
 
-        <div className="button-row session-footer-actions">
-          <button className="button-secondary" type="submit">
+        {isLastQuestion ? (
+          <button className="button-primary" type="submit">
             Submit session
           </button>
+        ) : (
           <button
             className="button-primary"
             type="button"
             onClick={() =>
               setCurrentIndex((index) => Math.min(index + 1, session.questions.length - 1))
             }
-            disabled={currentIndex === session.questions.length - 1}
           >
             Next question
           </button>
-        </div>
+        )}
       </form>
     </>
   );

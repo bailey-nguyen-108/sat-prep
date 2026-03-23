@@ -481,8 +481,8 @@ input {
 
 .session-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 180px;
-  gap: 14px;
+  grid-template-columns: minmax(0, 1fr) 252px;
+  gap: 16px;
   align-items: start;
 }
 
@@ -600,12 +600,14 @@ input {
 }
 
 .rail-card {
-  min-height: 212px;
+  min-height: 382px;
   border-radius: 24px;
 }
 
 .rail-title {
-  max-width: 140px;
+  margin-bottom: 8px;
+  font-size: 20px;
+  line-height: 1.1;
 }
 
 .nav-badges {
@@ -661,14 +663,6 @@ input {
   margin-top: -6px;
 }
 
-.results-actions {
-  margin-top: -4px;
-}
-
-.session-footer-actions {
-  justify-content: flex-end;
-}
-
 .results-metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -695,6 +689,27 @@ input {
   border-radius: 12px;
   background: var(--color-bg);
   padding: 16px 18px;
+}
+
+.session-rail-snapshot {
+  margin-top: 16px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.session-rail-snapshot-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.results-actions {
+  margin-top: -4px;
 }
 
 @media (max-width: 1100px) {
