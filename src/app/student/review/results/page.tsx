@@ -38,8 +38,8 @@ export default async function SessionResultsPage({
         </p>
         <h1 className="page-title">You finished strong.</h1>
         <p className="page-subtitle">
-          Your latest results are saved. Review what missed, then launch a follow-up session while
-          the patterns are still fresh.
+          Your latest results point to a narrow set of math skills that are worth another round
+          right now.
         </p>
       </div>
 
@@ -49,37 +49,22 @@ export default async function SessionResultsPage({
           <p className="stat-value" style={{ fontSize: 52 }}>
             {session.correct_count ?? 0} / {session.question_count}
           </p>
-          <p className="stat-label">{accuracy}% accuracy • stored in Supabase</p>
-          <div className="results-metrics">
-            <div className="results-metric">
-              <span className="results-metric-label">Correct</span>
-              <strong>{session.correct_count ?? 0}</strong>
-            </div>
-            <div className="results-metric">
-              <span className="results-metric-label">Needs review</span>
-              <strong>{session.question_count - (session.correct_count ?? 0)}</strong>
-            </div>
-            <div className="results-metric">
-              <span className="results-metric-label">Weak areas</span>
-              <strong>{session.weak_subtopics.length}</strong>
-            </div>
-          </div>
+          <p className="stat-label">{accuracy}% accuracy • best pace this week</p>
         </article>
 
         <article className="card dashboard-card">
           <h2 className="card-title">Weak-area follow-up</h2>
           <p className="page-subtitle">
-            We found the sub-topics that missed most often. Your next recommended session can pull
-            approved bank questions from those areas.
+            We found {session.weak_subtopics.length || "a small set of"} weak sub-topics below 70%
+            accuracy. Your next recommended session should pull approved questions from those
+            areas.
           </p>
           <div className="inline-list list-with-dividers" style={{ marginTop: 16 }}>
             {session.weak_subtopics.length > 0 ? (
-              session.weak_subtopics.map((topic, index) => (
+              session.weak_subtopics.slice(0, 1).map((topic) => (
                 <div className="inline-row" key={topic}>
                   <span>{topic}</span>
-                  <strong className={index === 0 ? "text-accent" : "text-warning"}>
-                    Focus next
-                  </strong>
+                  <strong className="text-accent">Below 70%</strong>
                 </div>
               ))
             ) : (
@@ -89,13 +74,6 @@ export default async function SessionResultsPage({
               </div>
             )}
           </div>
-          <div style={{ marginTop: 18 }}>
-            <span className="info-pill">
-              {session.weak_subtopics.length > 0
-                ? "Follow-up set ready"
-                : "No urgent follow-up needed"}
-            </span>
-          </div>
         </article>
       </section>
 
@@ -103,20 +81,18 @@ export default async function SessionResultsPage({
         <Link className="button-primary" href="/student/practice/setup">
           Practice weak areas
         </Link>
-        <Link className="button-secondary" href="/student/home">
-          Back to dashboard
+        <Link className="button-secondary" href={`#breakdown`}>
+          Review explanations
         </Link>
       </div>
 
       <section className="card-grid-2">
-        <article className="card dashboard-card">
+        <article className="card dashboard-card" id="breakdown">
           <h2 className="card-title">Question breakdown</h2>
           <div className="inline-list list-with-dividers">
-            {session.questions.slice(0, 6).map((question) => (
+            {session.questions.slice(0, 2).map((question) => (
               <div className="inline-row" key={question.id}>
-                <span>
-                  Question {question.position} • {question.subtopic}
-                </span>
+                <span>Question {question.position}</span>
                 <strong className={question.is_correct ? "text-success" : "text-accent"}>
                   {question.is_correct ? "Correct" : "Needs review"}
                 </strong>
