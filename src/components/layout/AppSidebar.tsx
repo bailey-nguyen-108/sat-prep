@@ -35,11 +35,13 @@ export function AppSidebar({ activeTab }: { activeTab: SidebarTab }) {
         </nav>
       </div>
 
-      <form action="/auth/sign-out" method="post">
-        <button className="sidebar-signout" type="submit">
-          Sign out
-        </button>
-      </form>
+      <div className="sidebar-footer-card">
+        <div className="sidebar-footer-copy">
+          <p className="sidebar-footer-name">Bailey Nguyen</p>
+          <p className="sidebar-footer-meta">Target 1400 • SAT in 19 days</p>
+        </div>
+        <span className="sidebar-footer-pill">7 day streak</span>
+      </div>
     </aside>
   );
 }
