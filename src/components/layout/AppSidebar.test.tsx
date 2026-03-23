@@ -1,6 +1,11 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import { vi } from "vitest";
 import { AppSidebar } from "@/components/layout/AppSidebar";
+
+vi.mock("@/app/login/actions", () => ({
+  signOutStudent: vi.fn()
+}));
 
 describe("AppSidebar", () => {
   it("highlights the active tab", () => {

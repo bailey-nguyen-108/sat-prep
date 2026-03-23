@@ -57,6 +57,13 @@ input {
   padding: 32px 24px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.sidebar-top {
+  display: flex;
+  flex-direction: column;
   gap: 24px;
 }
 
@@ -97,6 +104,16 @@ input {
   background: var(--color-sidebar-active);
   color: white;
   font-weight: 700;
+}
+
+.sidebar-signout {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: white;
+  padding: 14px 16px;
+  text-align: left;
 }
 
 .page {
@@ -143,11 +160,20 @@ input {
 
 .button-primary,
 .button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
   border-radius: var(--radius-md);
   padding: 18px 24px;
   font-weight: 700;
   cursor: pointer;
+}
+
+.button-primary:disabled,
+.button-secondary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .button-primary {
@@ -279,6 +305,12 @@ input {
   gap: 16px;
 }
 
+.button-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .field {
   display: flex;
   flex-direction: column;
@@ -297,6 +329,15 @@ input {
   background: var(--color-bg);
   color: var(--color-text);
   padding: 16px 18px;
+}
+
+.error-banner {
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(239, 83, 80, 0.12);
+  color: #b91c1c;
+  border: 1px solid rgba(239, 83, 80, 0.24);
 }
 
 .meta-row,
@@ -325,7 +366,8 @@ input {
 
 .pill,
 .pill-active,
-.info-pill {
+.info-pill,
+.radio-pill {
   border-radius: 999px;
   padding: 12px 16px;
   font-size: 14px;
@@ -347,6 +389,29 @@ input {
   background: #e8f3fe;
   color: var(--color-primary);
   font-weight: 700;
+}
+
+.radio-pill {
+  position: relative;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+
+.radio-pill input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-pill:has(input:checked) {
+  background: var(--color-primary);
+  color: white;
+  font-weight: 700;
+  border-color: transparent;
 }
 
 .session-layout {
@@ -403,6 +468,11 @@ input {
 .nav-badges {
   display: flex;
   gap: 10px;
+}
+
+.nav-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .nav-badge,
