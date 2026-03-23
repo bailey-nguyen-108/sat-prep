@@ -70,7 +70,7 @@ export default async function PracticeSetupPage() {
 
         <article className="card">
           <h2 className="card-title">Session summary</h2>
-          <p className="page-subtitle">10 questions • seeded from Supabase • tuned to your section choice</p>
+          <p className="page-subtitle">12 questions • 18 minutes • targets Heart of Algebra</p>
           <div style={{ marginTop: 16, marginBottom: 16 }}>
             <div className="card" style={{ background: "#E8F3FE", border: 0, padding: 20 }}>
               <p className="page-subtitle" style={{ color: "var(--color-primary)", margin: 0 }}>
@@ -79,14 +79,17 @@ export default async function PracticeSetupPage() {
               </p>
             </div>
           </div>
+          <p className="stat-label" style={{ marginBottom: 8 }}>
+            Recommended focus
+          </p>
           <div className="inline-list">
             <div className="inline-row">
-              <span>20 math questions ready</span>
+              <span>Linear equations</span>
               <strong className="text-accent">Priority</strong>
             </div>
             <div className="inline-row">
-              <span>20 reading-writing questions ready</span>
-              <strong className="text-warning">Published</strong>
+              <span>Systems of equations</span>
+              <strong className="text-warning">Warm-up</strong>
             </div>
           </div>
           <button className="button-primary" style={{ width: "100%", marginTop: 20 }}>
@@ -99,17 +102,17 @@ export default async function PracticeSetupPage() {
         <article className="card">
           <h2 className="card-title">Question mix preview</h2>
           <p className="page-subtitle">
-            The session pulls from the approved Supabase question bank, prioritizing the chosen
-            difficulty and filling any gaps from the same subject.
+            A balanced set keeps the session feeling achievable while still pushing your weakest
+            math concepts.
           </p>
           <div className="inline-list" style={{ marginTop: 16 }}>
             <div className="inline-row">
-              <span>Preferred difficulty</span>
-              <strong style={{ color: "var(--color-primary)" }}>First priority</strong>
+              <span>Heart of Algebra</span>
+              <strong style={{ color: "var(--color-primary)" }}>6 questions</strong>
             </div>
             <div className="inline-row">
-              <span>Fallback from same subject</span>
-              <strong className="text-accent">Auto-filled</strong>
+              <span>Systems &amp; graphs</span>
+              <strong className="text-accent">4 questions</strong>
             </div>
           </div>
         </article>
@@ -117,8 +120,9 @@ export default async function PracticeSetupPage() {
         <article className="card">
           <h2 className="card-title">What to expect</h2>
           <p className="page-subtitle">
-            After you submit, the app scores your answers, stores the session in Supabase, and
-            recommends the next weak-area follow-up right away.
+            You&apos;ll start with moderate-difficulty questions, then move into a short follow-up
+            cluster if your results show a clear weak area. All follow-ups come from the approved
+            bank.
           </p>
           <div style={{ marginTop: 18 }}>
             <span className="info-pill">Adaptive but review-safe</span>
