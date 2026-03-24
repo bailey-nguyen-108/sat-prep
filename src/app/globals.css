@@ -158,6 +158,9 @@ input {
 
 .page-hero-copy {
   max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .page-header {
@@ -187,6 +190,10 @@ input {
   margin: 0;
   color: var(--color-text-secondary);
   line-height: 1.5;
+}
+
+.page-header .page-subtitle {
+  line-height: 1.35;
 }
 
 .display-subtitle {
