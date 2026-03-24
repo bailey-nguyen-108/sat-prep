@@ -150,7 +150,7 @@ input {
 }
 
 .page {
-  padding: 36px 40px 48px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -578,6 +578,18 @@ input {
 
 .dashboard-card {
   min-height: 214px;
+}
+
+.home-dashboard-card {
+  min-height: 206px;
+}
+
+.home-list {
+  gap: 24px;
+}
+
+.home-list .inline-row {
+  align-items: center;
 }
 
 .score-card {

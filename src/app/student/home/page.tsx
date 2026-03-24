@@ -66,7 +66,7 @@ export default async function StudentHomePage() {
       </section>
 
       <section className="card-grid-2">
-        <article className="card dashboard-card">
+        <article className="card dashboard-card home-dashboard-card">
           <h2 className="card-title">Next best session</h2>
           <p className="page-subtitle">
             Focus on Heart of Algebra with 12 medium questions. This set is tuned to the skills
@@ -76,9 +76,9 @@ export default async function StudentHomePage() {
             <span className="info-pill">Recommended now</span>
           </div>
         </article>
-        <article className="card dashboard-card">
+        <article className="card dashboard-card home-dashboard-card">
           <h2 className="card-title">Weak areas to revisit</h2>
-          <div className="inline-list list-with-dividers">
+          <div className="inline-list home-list">
             <div className="inline-row">
               <span>{weakAreaPrimary}</span>
               <strong className="text-accent">58%</strong>
@@ -92,13 +92,13 @@ export default async function StudentHomePage() {
       </section>
 
       <section className="card-grid-2">
-        <article className="card dashboard-card">
+        <article className="card dashboard-card home-dashboard-card">
           <h2 className="card-title">Today&apos;s study plan</h2>
           <p className="page-subtitle">
             One 18-minute targeted math set, then a 10-minute review of yesterday&apos;s misses.
             Keeping the block short should help you stay consistent without burning out.
           </p>
-          <div className="inline-list list-with-dividers" style={{ marginTop: 16 }}>
+          <div className="inline-list home-list" style={{ marginTop: 18 }}>
             <div className="inline-row">
               <span>Targeted Math Set</span>
               <strong style={{ color: "var(--color-primary)" }}>18 min</strong>
@@ -109,9 +109,9 @@ export default async function StudentHomePage() {
             </div>
           </div>
         </article>
-        <article className="card dashboard-card">
+        <article className="card dashboard-card home-dashboard-card">
           <h2 className="card-title">Recent sessions</h2>
-          <div className="inline-list list-with-dividers">
+          <div className="inline-list home-list">
             {recentSessionRows.map((session) => (
               <div className="inline-row" key={session.label}>
                 <span>{session.label}</span>
