@@ -1,50 +1,199 @@
 # SAT Prep App - CEO-Level Architectural Plan
 
-**Project:** Mobile SAT prep app (iOS & Android) + Web admin dashboard
-**Branch:** master
+**Project:** SAT prep responsive web application (all roles: students, teachers, admins)
+**Branch:** develop
 **Status:** Greenfield - No existing code
-**Date:** 2026-03-19
-
-## Executive Summary
-
-Building a complete SAT prep ecosystem with:
-- **Flutter mobile app** (iOS & Android) for students with practice sessions, adaptive learning, and Stripe payments
-- **React + TypeScript web dashboard** (Next.js) for admin/teacher management
-- **Firebase backend** for authentication, database, and cloud functions
-- **OpenAI GPT-4** for AI-generated answer explanations
-- **Stripe** for premium subscriptions ($9.99/month)
-
-## Tech Stack Decisions
-
-| Component | Technology | Rationale |
-|-----------|-----------|-----------|
-| Mobile App | Flutter | Single codebase, excellent performance, great Firebase integration |
-| Web Dashboard | React + TypeScript (Next.js) | Industry standard, huge ecosystem, full-stack capabilities |
-| Backend | Firebase (Firestore + Cloud Functions) | BaaS = faster development, auto-scaling, built-in auth, no infrastructure management |
-| Database | Cloud Firestore | NoSQL, real-time sync, offline support, scales automatically |
-| Auth | Firebase Auth | Email/password built-in, session management, role-based access |
-| AI Provider | OpenAI GPT-4 | Best explanation quality for educational content |
-| Payments | Stripe | Industry standard, excellent docs, mobile SDK support |
-| Hosting | Firebase Hosting (web), App Store/Play Store (mobile) | Integrated with Firebase ecosystem |
+**Date:** 2026-03-20 (Updated after CEO review)
+**Architecture Version:** 2.0 (Pivoted from mobile-first to web-only)
 
 ---
 
-## System Architecture
+## ⚠️ CEO REVIEW FINDINGS (2026-03-20)
+
+**Review Status:** ✅ COMPLETE
+**Review Mode:** HOLD SCOPE (make baseline bulletproof, no expansions)
+**Overall Assessment:** 🔴 **ARCHITECTURE NOT LAUNCH-READY** - 144 issues found
+
+### Critical Blockers (Must Fix Before ANY Launch)
+**35 CRITICAL ISSUES** across security, data integrity, and infrastructure:
+
+1. **Security (10 issues)**: No API route protection, no CSRF verification, server-side validation missing, Firestore rules bug
+2. **Data Flow (7 issues)**: No session state persistence, race conditions, no atomic transactions
+3. **Infrastructure (8 issues)**: Wrong deployment platform, no CI/CD, no error tracking, no logging
+4. **Testing (5 issues)**: No test automation, no security tests, critical flows untested
+5. **Performance (4 issues)**: No caching, no Web Vitals monitoring
+6. **Accessibility (1 issue)**: Color contrast failures, no WCAG plan
+
+**Action Plan**: 8 days of work to fix critical issues before writing any feature code.
+
+**Full review report**: See Section 2 below for detailed issue list and recommendations.
+
+---
+
+## Executive Summary
+
+**UPDATED (2026-03-20)**: Project scope changed from mobile-first to responsive web app for all user roles.
+
+Building a responsive SAT prep web application with:
+- **Next.js 14 responsive web app** for students, teachers, and admins (mobile & desktop)
+- **Firebase backend** for authentication, database, and cloud functions
+- **OpenAI GPT-4** for AI-generated answer explanations
+- **Stripe** for premium subscriptions ($9.99/month)
+- **Vercel** for hosting (changed from Firebase Hosting due to SSR requirements)
+
+## Tech Stack Decisions (UPDATED 2026-03-20)
+
+| Component | Technology | Rationale | Changed? |
+|-----------|-----------|-----------|----------|
+| **Web App** | **Next.js 14 App Router + React 18 + TypeScript** | Industry standard, SSR/SSG support, excellent DX, responsive design | ✅ UPDATED (was: separate mobile + web) |
+| **Styling** | **Tailwind CSS v4** | Utility-first, responsive, matches DESIGN.md specs | ✅ NEW |
+| **Hosting** | **Vercel** | Best Next.js support, automatic deployments, edge functions | ✅ CHANGED (was: Firebase Hosting) |
+| **Backend** | Firebase (Firestore + Cloud Functions) | BaaS = faster development, auto-scaling, built-in auth | ✅ SAME |
+| **Database** | Cloud Firestore | NoSQL, real-time sync, offline support, scales automatically | ✅ SAME |
+| **Auth** | Firebase Auth + NextAuth.js | Email/password, session management, role-based custom claims | ✅ UPDATED (added NextAuth) |
+| **State Management** | React Context + Zustand (complex state) | Zustand for practice session state, Context for user session | ✅ NEW |
+| **Data Fetching** | SWR (client) + React cache() (server) | Client-side caching + server deduplication | ✅ NEW |
+| **Forms** | React Hook Form + Zod | Type-safe validation, minimal re-renders | ✅ SAME |
+| **AI Provider** | OpenAI GPT-4 | Best explanation quality for educational content | ✅ SAME |
+| **Payments** | Stripe | Industry standard, excellent docs, webhook support | ✅ SAME |
+| **Testing** | Playwright (E2E) + Vitest (unit) + Testing Library | Modern, fast, Next.js compatible | ✅ NEW |
+| **Monitoring** | Sentry (errors) + Vercel Analytics (performance) | Industry standard error tracking + Web Vitals | ✅ NEW |
+| **Logging** | Pino (structured logging) | Fast, structured, supports log levels | ✅ NEW |
+| **Caching** | Upstash Redis (serverless) | Reduce Firestore costs, improve performance | ✅ NEW |
+
+---
+
+## Section 2: Critical Issues from CEO Review
+
+**Review Date:** 2026-03-20
+**Review Mode:** HOLD SCOPE (make baseline bulletproof)
+**Reviewer:** CEO-level architectural review agent
+
+### Issue Summary
+
+| Category | Critical 🔴 | High 🟠 | Medium 🟡 | Total |
+|----------|------------|---------|-----------|-------|
+| **Security & Threat Model** | 10 | 7 | 7 | 24 |
+| **Data Flow & Edge Cases** | 7 | 12 | 10 | 29 |
+| **Code Quality** | 5 | 4 | 4 | 13 |
+| **Testing** | 5 | 5 | 4 | 14 |
+| **Performance** | 4 | 5 | 4 | 13 |
+| **Observability** | 5 | 5 | 3 | 13 |
+| **Deployment** | 3 | 5 | 4 | 12 |
+| **Long-Term Trajectory** | 2 | 5 | 6 | 13 |
+| **Design & UX** | 3 | 5 | 5 | 13 |
+| **TOTAL** | **35** | **48** | **61** | **144** |
+
+### Top 10 Critical Issues (Must Fix Immediately)
+
+1. **ISSUE 107**: Deployment platform incompatible - Firebase Hosting doesn't support Next.js SSR → **Switch to Vercel**
+2. **ISSUE 4**: API routes unprotected - Anyone can call `/api/questions/create` directly → **Add middleware protection**
+3. **ISSUE 30**: No session state persistence - Refresh/close browser loses progress → **Implement localStorage + Firestore sync**
+4. **ISSUE 94**: No logging strategy - Can't debug production issues → **Implement Pino structured logging**
+5. **ISSUE 95**: Error tracking tool not chosen - No error monitoring → **Choose Sentry and configure**
+6. **ISSUE 108**: No CI/CD pipeline - Manual deploys, no quality gates → **Setup GitHub Actions**
+7. **ISSUE 81**: No Web Vitals monitoring - Can't measure performance → **Enable Vercel Analytics**
+8. **ISSUE 14**: Firestore security bug - Teachers can read all users (privacy violation) → **Fix security rules**
+9. **ISSUE 37**: Session save not atomic - Firestore write can fail partially → **Use Firestore transactions**
+10. **ISSUE 133**: Animation risk on practice screens - Violates DESIGN.md rule → **Enforce no-animation zone**
+
+### Immediate Action Plan (Before Writing Code)
+
+**Phase 1: Security & Infrastructure** (3 days)
+- [ ] Switch deployment to Vercel (ISSUE 107)
+- [ ] Add API route protection middleware (ISSUE 4)
+- [ ] Enable CSRF protection in NextAuth (ISSUE 5)
+- [ ] Fix Firestore security rules (ISSUE 14)
+- [ ] Add server-side validation (Zod) (ISSUE 8)
+- [ ] Implement rate limiting (ISSUE 17)
+- [ ] Setup Sentry error tracking (ISSUE 95)
+
+**Phase 2: Data Integrity** (2 days)
+- [ ] Implement session state persistence (ISSUE 30)
+- [ ] Add Firestore transactions for atomic writes (ISSUE 37, 40)
+- [ ] Add retry logic for Firestore writes (ISSUE 36)
+- [ ] Implement subscription check transaction (ISSUE 29)
+- [ ] Add rollback for failed registrations (ISSUE 25)
+
+**Phase 3: Testing & Monitoring** (2 days)
+- [ ] Setup GitHub Actions CI/CD (ISSUE 108)
+- [ ] Create OpenAI API mocks (ISSUE 72)
+- [ ] Add Firestore security rules tests (ISSUE 79)
+- [ ] Implement Pino logging (ISSUE 94)
+- [ ] Enable Vercel Analytics (ISSUE 81)
+- [ ] Add error handling conventions (ISSUE 59)
+
+**Phase 4: Caching & Performance** (1 day)
+- [ ] Setup Upstash Redis caching (ISSUE 84, 87)
+- [ ] Implement React cache() for server components (ISSUE 58)
+- [ ] Add SWR for client-side data fetching (ISSUE 84)
+- [ ] Implement SSR optimization (ISSUE 82)
+
+**Phase 5: Accessibility & UX** (1 day)
+- [ ] Fix color contrast (amber text → darker) (ISSUE 135)
+- [ ] Add ARIA labels to all components (ISSUE 134)
+- [ ] Implement skeleton screens (ISSUE 138)
+- [ ] Create error message style guide (ISSUE 139)
+- [ ] Enforce design tokens (ISSUE 136)
+
+**Total Estimated Time**: ~9 days to make architecture launch-ready
+
+### Recommendations
+
+**Immediate Changes**:
+1. Use Vercel for deployment (not Firebase Hosting)
+2. Add database abstraction layer to reduce Firebase lock-in
+3. Implement comprehensive error handling with try-catch + logging
+4. Add Redis caching (Upstash) to reduce Firestore costs
+5. Setup CI/CD with automated tests before ANY merges
+
+**Process Improvements**:
+1. Require CI to pass before merging (GitHub branch protection)
+2. Schedule quarterly tech debt sprints (1 week every 6 months)
+3. Create incident runbooks for common failures
+4. Automate security scans (npm audit, Dependabot)
+5. Document all architectural decisions (ADRs)
+
+**Documentation Needed**:
+1. Error message style guide
+2. Deployment runbook with rollback procedures
+3. Incident response playbooks
+4. Developer onboarding guide
+5. API documentation (TypeDoc auto-generated)
+
+---
+
+## System Architecture (UPDATED 2026-03-20)
 
 ### High-Level Architecture Diagram
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                         CLIENTS                                  │
-├──────────────────────┬──────────────────────────────────────────┤
-│  Flutter Mobile App  │     React Web Dashboard (Next.js)        │
-│  (iOS & Android)     │     (Admin/Teacher Portal)               │
-│  - Student features  │     - Question bank CRUD                 │
-│  - Practice sessions │     - Student performance                │
-│  - Subscription mgmt │     - Teacher assignments                │
-└──────────────────────┴──────────────────────────────────────────┘
+│                    RESPONSIVE WEB APP                            │
+│                    (Next.js 14 + Tailwind)                       │
+├──────────────────────┬──────────────────┬──────────────────────┤
+│   STUDENT VIEW       │   TEACHER VIEW   │   ADMIN VIEW         │
+│   (Mobile/Desktop)   │   (Desktop)      │   (Desktop)          │
+├──────────────────────┼──────────────────┼──────────────────────┤
+│ • Login/Register     │ • Login          │ • Login              │
+│ • Practice Sessions  │ • View Students  │ • Question Bank CRUD │
+│ • Results & Stats    │ • Performance    │ • AI Generation Queue│
+│ • Subscription       │ • Assigned       │ • Manage Teachers    │
+│ • Profile            │   Classes Only   │ • Manage Classes     │
+└──────────────────────┴──────────────────┴──────────────────────┘
                                     │
-                                    ▼
+                    ┌───────────────┴────────────────┐
+                    ▼                                ▼
+┌─────────────────────────────────────┐  ┌──────────────────────┐
+│       VERCEL (Hosting)               │  │  UPSTASH REDIS       │
+│                                      │  │  (Caching Layer)     │
+│ • Next.js SSR/SSG                   │  │                      │
+│ • API Routes                         │  │ • Question cache     │
+│ • Middleware (auth, rate limiting)   │  │ • AI explanation     │
+│ • Edge Functions                     │  │   cache              │
+└─────────────────────────────────────┘  │ • Session state      │
+                    │                     └──────────────────────┘
+                    ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                     FIREBASE BACKEND                             │
 ├─────────────────────────────────────────────────────────────────┤

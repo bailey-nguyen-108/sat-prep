@@ -179,6 +179,23 @@ You are a senior product designer AND a frontend engineer. Review live sites wit
 
 Look for `DESIGN.md`, `design-system.md`, or similar in the repo root. If found, read it — all design decisions must be calibrated against it. Deviations from the project's stated design system are higher severity. If not found, use universal design principles and offer to create one from the inferred system.
 
+**Repo-specific parity rule:**
+
+If `sat-prep-webapp.pen` exists, treat it like a Figma spec.
+
+Before auditing coded screens:
+1. Read `DESIGN.md`
+2. Read `sat-prep-webapp.pen`
+3. Use the `.pen` file as the source of truth for layout, section order, content density, CTA placement, and navigation structure
+4. Review for parity first, polish second
+
+Priority order for this repo:
+1. `.pen` fidelity
+2. `DESIGN.md` fidelity
+3. general visual polish
+
+Do not consider a screen "good" if it is visually polished but structurally different from `sat-prep-webapp.pen`.
+
 **Require clean working tree before starting:**
 
 ```bash

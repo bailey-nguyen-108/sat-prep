@@ -23,15 +23,24 @@ If gstack skills aren't working, run `cd .claude/skills/gstack && ./setup` to bu
 
 ## Design System
 
-Always read `DESIGN.md` before making any visual or UI decisions.
+**CRITICAL: Always read `DESIGN.md` before ANY Pencil design work or visual decisions.**
 
-All font choices, colors, spacing, and aesthetic direction are defined there. Do not deviate without explicit user approval.
+All font choices, colors, spacing, and aesthetic direction are defined in DESIGN.md. Do not deviate without explicit user approval.
 
-**Key decisions:**
+**When designing in Pencil:**
+1. MUST read DESIGN.md first to understand the design system
+2. Use ONLY the colors, typography, and spacing defined in DESIGN.md
+3. Follow the aesthetic direction: Bold Modern SaaS
+4. Never hardcode values - reference the design system
+
+**Key decisions from DESIGN.md:**
 - Typography: Fraunces (display) + DM Sans (body)
-- Colors: Blue primary (#2563EB) + Amber accent (#F59E0B)
-- Aesthetic: Refined Utility (thoughtfully minimal with warmth)
+- Colors: Bright Blue (#42A5F5) primary + Coral Red (#EF5350) accent
+- Dark sidebar (#1A1A1A) with light content (#FFFFFF)
+- Aesthetic: Bold Modern SaaS (confident, colorful data viz)
 - Motion: Intentional animations (but NEVER on practice question screens)
+- Spacing: 8px base unit
+- Border radius: 4-24px scale
 
 In QA mode, flag any code that doesn't match DESIGN.md.
 
