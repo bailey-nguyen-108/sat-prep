@@ -32,6 +32,7 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
+  scroll-behavior: smooth;
 }
 
 a {
@@ -156,6 +157,10 @@ input {
   gap: 24px;
 }
 
+.screen-fade-in {
+  animation: screen-fade-in 220ms ease-out;
+}
+
 .page-hero-copy {
   max-width: 760px;
   display: flex;
@@ -178,7 +183,7 @@ input {
 }
 
 .page-title {
-  font-size: 36px;
+  font-size: 42px;
 }
 
 .display-title {
@@ -200,6 +205,18 @@ input {
   color: #d7e4f2;
   max-width: 560px;
   font-size: 20px;
+}
+
+.page-title-xl {
+  font-size: 42px;
+}
+
+.page-header-compact {
+  gap: 0;
+}
+
+.page-subtitle-home {
+  max-width: 840px;
 }
 
 .button-primary,
@@ -358,6 +375,74 @@ input {
   gap: 24px;
 }
 
+.setup-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.setup-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.setup-option-card {
+  min-height: 152px;
+  padding: 20px 24px;
+  justify-content: center;
+}
+
+.setup-summary-card {
+  min-height: 380px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.setup-summary-note {
+  margin-top: 8px;
+  border-radius: 16px;
+  background: #e8f3fe;
+  padding: 20px;
+}
+
+.setup-summary-note-copy {
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.setup-focus-label {
+  margin-top: 4px;
+}
+
+.setup-summary-list {
+  gap: 16px;
+}
+
+.setup-start-button {
+  width: 100%;
+  margin-top: auto;
+}
+
+.setup-preview-card,
+.setup-expect-card {
+  min-height: 212px;
+}
+
+.setup-preview-list {
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.radio-pill-count {
+  min-width: 56px;
+  justify-content: center;
+  display: inline-flex;
+}
+
 .field-stack,
 .session-options {
   display: flex;
@@ -497,23 +582,36 @@ input {
   display: flex;
   flex-direction: column;
   gap: 18px;
-  padding: 24px;
-  min-height: 420px;
+  padding: 32px;
+  min-height: 520px;
+  border-radius: 24px;
 }
 
 .question-prompt {
   margin: 0;
-  font-size: 28px;
-  line-height: 1.38;
+  font-size: 30px;
+  line-height: 1.34;
+}
+
+.choice-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.question-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .choice {
   width: 100%;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1px solid var(--color-border);
   background: var(--color-bg);
   color: var(--color-text);
-  padding: 14px 16px;
+  padding: 10px 16px;
   display: flex;
   gap: 16px;
   align-items: center;
@@ -522,14 +620,14 @@ input {
 }
 
 .choice-active {
-  background: rgba(66, 165, 245, 0.1);
-  border-color: rgba(66, 165, 245, 0.5);
+  background: rgba(66, 165, 245, 0.12);
+  border-color: rgba(66, 165, 245, 0.42);
 }
 
 .choice-badge {
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
   display: grid;
   place-items: center;
   background: var(--color-surface);
@@ -570,6 +668,11 @@ input {
   padding: 16px 18px;
 }
 
+.timer-card-session {
+  width: 180px;
+  border-radius: 16px;
+}
+
 .timer-card .stat-value {
   font-size: 34px;
 }
@@ -588,11 +691,28 @@ input {
 }
 
 .home-dashboard-card {
-  min-height: 206px;
+  min-height: 190px;
 }
 
 .home-list {
   gap: 24px;
+}
+
+.home-lower-grid {
+  align-items: stretch;
+}
+
+.home-list-compact {
+  gap: 22px;
+}
+
+.metric-card-home {
+  min-height: 126px;
+  border-radius: 24px;
+}
+
+.stat-value-home {
+  font-size: 38px;
 }
 
 .home-list .inline-row {
@@ -604,6 +724,50 @@ input {
   display: flex;
   flex-direction: column;
   gap: 18px;
+}
+
+.score-card-results {
+  min-height: 248px;
+  border-radius: 24px;
+}
+
+.score-card-value {
+  font-size: 52px;
+}
+
+.results-score-copy {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.results-top-grid {
+  display: grid;
+  grid-template-columns: 420px minmax(0, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.results-followup-card {
+  min-height: 248px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.results-followup-list {
+  gap: 16px;
+}
+
+.results-followup-cta {
+  width: 100%;
+  margin-top: auto;
+}
+
+.results-review-card {
+  border-radius: 24px;
 }
 
 .rail-stat {
@@ -627,6 +791,14 @@ input {
   margin-bottom: 8px;
   font-size: 20px;
   line-height: 1.1;
+}
+
+.rail-copy {
+  max-width: 178px;
+}
+
+.rail-summary-copy {
+  margin-top: 16px;
 }
 
 .nav-badges {
@@ -660,6 +832,18 @@ input {
   background: var(--color-primary);
   color: white;
   font-weight: 700;
+  border-color: transparent;
+}
+
+.nav-badge-flagged {
+  background: var(--color-accent);
+  color: white;
+  font-weight: 700;
+  border-color: transparent;
+}
+
+.nav-badge-current {
+  box-shadow: inset 0 0 0 2px rgba(15, 23, 42, 0.08);
 }
 
 .text-accent {
@@ -680,6 +864,18 @@ input {
   align-items: center;
   gap: 20px;
   margin-top: -6px;
+}
+
+.session-footer-button {
+  min-width: 188px;
+}
+
+.session-flag-button {
+  gap: 10px;
+}
+
+.session-flag-button svg {
+  color: var(--color-accent);
 }
 
 .results-metrics {
@@ -704,10 +900,18 @@ input {
   opacity: 0.82;
 }
 
+.results-metric-value {
+  font-size: 24px;
+}
+
 .session-hint {
   border-radius: 12px;
   background: var(--color-bg);
   padding: 16px 18px;
+}
+
+.session-hint-copy {
+  margin: 0;
 }
 
 .session-rail-snapshot {
@@ -731,6 +935,154 @@ input {
   margin-top: -4px;
 }
 
+.review-list {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.review-item {
+  border-top: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.review-item:first-child {
+  border-top: 0;
+}
+
+.review-item-header {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.review-item-label {
+  font-size: 16px;
+  color: var(--color-text);
+}
+
+.review-item-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.review-status {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.review-status-correct {
+  color: var(--color-success);
+}
+
+.review-status-incorrect {
+  color: var(--color-accent);
+}
+
+.review-status-flagged {
+  color: var(--color-primary);
+}
+
+.review-status-unanswered {
+  color: var(--color-text);
+}
+
+.review-chevron {
+  color: var(--color-text-secondary);
+  transition: transform 140ms ease;
+}
+
+.review-chevron-open {
+  transform: rotate(180deg);
+}
+
+.review-item-body {
+  border-radius: 16px;
+  background: var(--color-bg);
+  padding: 18px 20px;
+  margin-bottom: 12px;
+}
+
+.review-answer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.review-answer-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.review-answer-label {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+.review-answer-value {
+  margin: 0;
+  font-size: 15px;
+  color: var(--color-accent);
+}
+
+.review-answer-value-success {
+  color: var(--color-success);
+}
+
+.review-explanation {
+  margin: 16px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.session-eyebrow,
+.results-eyebrow {
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.session-page-title {
+  font-size: 42px;
+}
+
+.session-subtitle {
+  max-width: 720px;
+}
+
+.session-progress-track {
+  margin: 18px 0 10px;
+}
+
+.page-header-session {
+  align-items: flex-start;
+}
+
+.session-hero-copy {
+  width: min(820px, 100%);
+}
+
+@keyframes screen-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 1100px) {
   .split-auth,
   .app-shell {
@@ -746,13 +1098,16 @@ input {
   .button-row,
   .session-layout,
   .card-grid-3,
-  .card-grid-2 {
+  .card-grid-2,
+  .results-top-grid,
+  .setup-grid {
     grid-template-columns: 1fr;
     flex-direction: column;
   }
 
   .results-metrics,
-  .session-layout {
+  .session-layout,
+  .review-answer-grid {
     grid-template-columns: 1fr;
   }
 }

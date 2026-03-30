@@ -23,3 +23,10 @@ export type SessionResult = {
   questionCount: number;
   weakSubtopics: string[];
 };
+
+export type TopicAccuracy = {
+  subtopic: string;
+  accuracyPercent: number;
+  total: number;
+  correct: number;
+};

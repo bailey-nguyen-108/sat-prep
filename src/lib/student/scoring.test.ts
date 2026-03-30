@@ -55,7 +55,7 @@ describe("scorePracticeSession", () => {
       score: 33,
       correctCount: 1,
       questionCount: 3,
-      weakSubtopics: ["Linear equations", "Systems of equations"]
+      weakSubtopics: ["Systems of equations", "Linear equations"]
     });
   });
 });
