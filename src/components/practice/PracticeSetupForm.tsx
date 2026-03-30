@@ -14,6 +14,14 @@ const QUESTION_COUNT_COPY: Record<number, { title: string; label: string }> = {
   50: { title: "50-question deep dive", label: "Max coverage" }
 };
 
+function getPreviewLabelClass(value: number) {
+  if (value === 20) {
+    return "setup-preview-label setup-preview-label-accent";
+  }
+
+  return "setup-preview-label setup-preview-label-primary";
+}
+
 export function PracticeSetupForm({
   defaultSubject = "math"
 }: PracticeSetupFormProps) {
@@ -128,25 +136,7 @@ export function PracticeSetupForm({
           {previewRows.map((row) => (
             <div className="inline-row" key={row.key}>
               <span>{row.title}</span>
-              <strong
-                className={
-                  row.key === 20
-                    ? "text-accent"
-                    : row.key === 10
-                      ? ""
-                      : ""
-                }
-                style={{
-                  color:
-                    row.key === 10
-                      ? "var(--color-primary)"
-                      : row.key === 20
-                        ? "var(--color-accent)"
-                        : "var(--color-primary)"
-                }}
-              >
-                {row.label}
-              </strong>
+              <strong className={getPreviewLabelClass(row.key)}>{row.label}</strong>
             </div>
           ))}
         </div>
