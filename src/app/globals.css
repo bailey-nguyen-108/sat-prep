@@ -389,9 +389,9 @@ input {
 }
 
 .setup-option-card {
-  min-height: 152px;
+  min-height: 144px;
   padding: 20px 24px;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .setup-summary-card {
