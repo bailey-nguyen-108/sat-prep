@@ -436,6 +436,7 @@ Expanded row must show:
 The review panel should be self-contained:
 - a student should be able to understand the original question without leaving the results screen
 - a student should be able to understand why each answer choice was wrong, not only why the correct answer was right
+- the expanded review panel should use full card width with readable answer blocks and generous spacing; do not compress the explanation layout into narrow columns
 
 Important:
 - explanation must reference the actual answer content, not only `A/B/C/D`
