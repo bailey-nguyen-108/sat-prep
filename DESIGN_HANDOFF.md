@@ -231,8 +231,10 @@ Render exactly 3 option cards:
 3. `Number of questions`
 
 Layout rule:
-- these three left-column cards should be tall enough that the bottom of the stack sits visually closer to the lower preview row
-- do not let the `Question count preview` card feel detached from the `Number of questions` card
+- these three cards should visually match the `.pen` geometry
+- each card uses centered vertical composition, not top-aligned composition
+- label row and chip row should sit centered within the card height with even vertical breathing room above and below
+- do not compress the cards to fit more content; match the approved desktop proportions from the `.pen`
 
 #### Section
 
@@ -283,28 +285,12 @@ Primary CTA:
 
 ### 5.4 Lower Row
 
-Render two cards:
-1. `Question count preview`
-2. `What to expect`
+Do not render a lower row on the Practice Setup screen.
 
-#### Question count preview
-
-Purpose:
-- explain the tradeoff among `10`, `20`, and `50`
-
-Current rows:
-- `10-question check-in` → `Quick reset`
-- `20-question standard block` → `Best default`
-- `50-question deep dive` → `Max coverage`
-
-#### What to expect
-
-Purpose:
-- explain that longer sessions are still reviewable
-- explain that results should scale by question grouping or question review structure
-
-Do not render:
-- `Adaptive but review-safe` pill or helper badge
+Removed from the approved design:
+- `Question count preview`
+- `What to expect`
+- any helper badge or pill associated with those removed cards
 
 ## 6. Practice Session Screen
 
@@ -438,13 +424,18 @@ Collapsed row must show:
 - chevron
 
 Expanded row must show:
-- `Your answer`
-- answer letter
-- answer text
-- `Correct answer`
-- answer letter
-- answer text
-- explanation text
+- full question content / question stem
+- all answer choices, not just the chosen answer and the correct answer
+- for each answer choice:
+  - answer label / answer text
+  - explanation of why that specific answer is right or wrong
+- visual indication of:
+  - student answer
+  - correct answer
+
+The review panel should be self-contained:
+- a student should be able to understand the original question without leaving the results screen
+- a student should be able to understand why each answer choice was wrong, not only why the correct answer was right
 
 Important:
 - explanation must reference the actual answer content, not only `A/B/C/D`

@@ -48,7 +48,9 @@ input {
 .app-shell {
   display: grid;
   grid-template-columns: 264px 1fr;
-  min-height: 100vh;
+  width: min(100%, 1440px);
+  min-height: 1024px;
+  margin: 0 auto;
   background: var(--color-bg);
 }
 
@@ -155,6 +157,7 @@ input {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  width: 100%;
 }
 
 .screen-fade-in {
@@ -377,7 +380,7 @@ input {
 
 .setup-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 1fr;
+  grid-template-columns: 620px minmax(0, 1fr);
   gap: 16px;
   align-items: start;
 }
@@ -386,9 +389,13 @@ input {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-width: 0;
 }
 
 .setup-option-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   min-height: 152px;
   padding: 20px 24px;
   justify-content: center;
@@ -427,33 +434,8 @@ input {
   margin-top: auto;
 }
 
-.setup-preview-card,
-.setup-expect-card {
-  min-height: 323px;
-}
-
-.setup-preview-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.setup-preview-list {
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.setup-preview-label {
-  font-size: 15px;
-  font-weight: 700;
-}
-
-.setup-preview-label-primary {
-  color: var(--color-primary);
-}
-
-.setup-preview-label-accent {
-  color: var(--color-accent);
+.setup-hero-copy {
+  gap: 8px;
 }
 
 .setup-summary-card .card-title {

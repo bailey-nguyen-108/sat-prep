@@ -1317,6 +1317,7 @@
                           "id": "EyEC8",
                           "name": "secCard",
                           "width": "fill_container",
+                          "height": 152,
                           "fill": "$color-surface",
                           "cornerRadius": "$radius-xl",
                           "stroke": {
@@ -1325,11 +1326,12 @@
                             "fill": "$color-border"
                           },
                           "layout": "vertical",
-                          "gap": 12,
+                          "gap": 20,
                           "padding": [
                             20,
                             24
                           ],
+                          "justifyContent": "center",
                           "children": [
                             {
                               "type": "text",
@@ -1408,6 +1410,7 @@
                           "id": "00AEg",
                           "name": "diffCard",
                           "width": "fill_container",
+                          "height": 152,
                           "fill": "$color-surface",
                           "cornerRadius": "$radius-xl",
                           "stroke": {
@@ -1416,11 +1419,12 @@
                             "fill": "$color-border"
                           },
                           "layout": "vertical",
-                          "gap": 12,
+                          "gap": 20,
                           "padding": [
                             20,
                             24
                           ],
+                          "justifyContent": "center",
                           "children": [
                             {
                               "type": "text",
@@ -1476,6 +1480,7 @@
                           "id": "iOfBJ",
                           "name": "timedCard",
                           "width": "fill_container",
+                          "height": 152,
                           "fill": "$color-surface",
                           "cornerRadius": "$radius-xl",
                           "stroke": {
@@ -1484,11 +1489,12 @@
                             "fill": "$color-border"
                           },
                           "layout": "vertical",
-                          "gap": 12,
+                          "gap": 20,
                           "padding": [
                             20,
                             24
                           ],
+                          "justifyContent": "center",
                           "children": [
                             {
                               "type": "text",
@@ -1590,6 +1596,7 @@
                       "id": "8s1S3",
                       "name": "summary",
                       "width": "fill_container",
+                      "height": 488,
                       "fill": "$color-surface",
                       "cornerRadius": "$radius-xl",
                       "stroke": {
@@ -1740,217 +1747,6 @@
                               "content": "Start practice session",
                               "fontFamily": "DM Sans",
                               "fontSize": 16,
-                              "fontWeight": "700"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "8VxXg",
-                  "name": "previewRow",
-                  "width": "fill_container",
-                  "gap": 16,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "qwiUI",
-                      "name": "mixCard",
-                      "width": 620,
-                      "fill": "$color-surface",
-                      "cornerRadius": "$radius-xl",
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "$color-border"
-                      },
-                      "layout": "vertical",
-                      "gap": 16,
-                      "padding": 24,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "p1fpK",
-                          "name": "mixTitle",
-                          "fill": "$color-text",
-                          "content": "Question count preview",
-                          "fontFamily": "Fraunces",
-                          "fontSize": 28,
-                          "fontWeight": "700"
-                        },
-                        {
-                          "type": "text",
-                          "id": "yO9Um",
-                          "name": "mixBody",
-                          "fill": "$color-text-secondary",
-                          "textGrowth": "fixed-width",
-                          "width": "fill_container",
-                          "content": "Students can choose a short 10-question check-in, a standard 20-question block, or a deeper 50-question session.",
-                          "lineHeight": 1.5,
-                          "fontFamily": "DM Sans",
-                          "fontSize": 16,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "frame",
-                          "id": "NhVd9",
-                          "name": "mix1",
-                          "width": "fill_container",
-                          "padding": [
-                            14,
-                            0
-                          ],
-                          "justifyContent": "space_between",
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "lXfg5",
-                              "name": "mix1a",
-                              "fill": "$color-text",
-                              "content": "10-question check-in",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 16,
-                              "fontWeight": "normal"
-                            },
-                            {
-                              "type": "text",
-                              "id": "v9RAz",
-                              "name": "mix1b",
-                              "fill": "$color-primary",
-                              "content": "Quick reset",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 15,
-                              "fontWeight": "700"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "frame",
-                          "id": "1ygE5",
-                          "name": "mix2",
-                          "width": "fill_container",
-                          "padding": [
-                            14,
-                            0
-                          ],
-                          "justifyContent": "space_between",
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "yYabv",
-                              "name": "mix2a",
-                              "fill": "$color-text",
-                              "content": "20-question standard block",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 16,
-                              "fontWeight": "normal"
-                            },
-                            {
-                              "type": "text",
-                              "id": "Catpp",
-                              "name": "mix2b",
-                              "fill": "$color-accent",
-                              "content": "Best default",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 15,
-                              "fontWeight": "700"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "frame",
-                          "id": "9HjKI",
-                          "name": "mix3",
-                          "width": "fill_container",
-                          "padding": [
-                            14,
-                            0
-                          ],
-                          "justifyContent": "space_between",
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "NMe39",
-                              "fill": "$color-text",
-                              "content": "50-question deep dive",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 16,
-                              "fontWeight": "normal"
-                            },
-                            {
-                              "type": "text",
-                              "id": "ciHK9",
-                              "fill": "$color-primary",
-                              "content": "Max coverage",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 15,
-                              "fontWeight": "700"
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "1vavv",
-                      "name": "expectCard",
-                      "width": "fill_container",
-                      "fill": "$color-surface",
-                      "cornerRadius": "$radius-xl",
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "$color-border"
-                      },
-                      "layout": "vertical",
-                      "gap": 16,
-                      "padding": 24,
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "RSk5g",
-                          "name": "expectTitle",
-                          "fill": "$color-text",
-                          "content": "What to expect",
-                          "fontFamily": "Fraunces",
-                          "fontSize": 28,
-                          "fontWeight": "700"
-                        },
-                        {
-                          "type": "text",
-                          "id": "JhJFT",
-                          "name": "expectBody",
-                          "fill": "$color-text-secondary",
-                          "textGrowth": "fixed-width",
-                          "width": "fill_container",
-                          "content": "Short sets keep momentum high, while longer sessions are grouped in results by question range so review stays scannable.",
-                          "lineHeight": 1.5,
-                          "fontFamily": "DM Sans",
-                          "fontSize": 16,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "frame",
-                          "id": "3KJiT",
-                          "name": "expectPill",
-                          "fill": "#E8F3FE",
-                          "cornerRadius": 9999,
-                          "padding": [
-                            12,
-                            16
-                          ],
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "eoTWg",
-                              "name": "expectPillTxt",
-                              "fill": "$color-primary",
-                              "content": "Adaptive but review-safe",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 14,
                               "fontWeight": "700"
                             }
                           ]
@@ -2396,7 +2192,7 @@
                               "name": "rail1",
                               "width": 44,
                               "height": 44,
-                              "fill": "$color-primary",
+                              "fill": "#42A5F5",
                               "cornerRadius": "$radius-md",
                               "layout": "vertical",
                               "justifyContent": "center",
@@ -2449,12 +2245,12 @@
                               "name": "rail3",
                               "width": 44,
                               "height": 44,
-                              "fill": "$color-bg",
+                              "fill": "#F8FAFC",
                               "cornerRadius": "$radius-md",
                               "stroke": {
                                 "align": "inside",
                                 "thickness": 1,
-                                "fill": "$color-border"
+                                "fill": "#E2E8F0"
                               },
                               "layout": "vertical",
                               "justifyContent": "center",
@@ -2464,11 +2260,10 @@
                                   "type": "text",
                                   "id": "tQgtJ",
                                   "name": "rail3Txt",
-                                  "fill": "$color-text",
+                                  "fill": "#0F172A",
                                   "content": "9",
                                   "fontFamily": "DM Sans",
-                                  "fontSize": 15,
-                                  "fontWeight": "normal"
+                                  "fontSize": 15
                                 }
                               ]
                             }
@@ -3532,111 +3327,196 @@
                         },
                         {
                           "type": "frame",
-                          "id": "zRqpY",
-                          "width": "fill_container",
-                          "fill": "$color-bg",
-                          "cornerRadius": "$radius-lg",
+                          "id": "HmUQH",
+                          "name": "expandedReview",
+                          "width": "fit_content(0)",
+                          "fill": "#F8FAFC",
+                          "cornerRadius": 12,
                           "layout": "vertical",
-                          "gap": 12,
+                          "gap": 16,
                           "padding": 18,
                           "children": [
                             {
                               "type": "frame",
-                              "id": "HRZ4O",
+                              "id": "OC4Hs",
+                              "name": "wrongHeader",
                               "width": "fill_container",
-                              "gap": 16,
+                              "layout": "vertical",
+                              "gap": 8,
                               "children": [
                                 {
+                                  "type": "text",
+                                  "id": "L0klx",
+                                  "fill": "#0F172A",
+                                  "content": "Which choice best completes the sentence so that it is grammatically correct? The tutoring session covered linear equations in detail, and the student still missed the sign change in the final step.",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 15,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "gew5n",
+                              "name": "wrongAnswers",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 12,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "CZoTd",
+                                  "fill": "#475569",
+                                  "content": "Answer choices and rationale",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 13,
+                                  "fontWeight": "700"
+                                },
+                                {
                                   "type": "frame",
-                                  "id": "yxmXR",
+                                  "id": "k2Xie",
+                                  "name": "wrongA",
                                   "width": "fill_container",
+                                  "fill": "#FFFFFF",
+                                  "cornerRadius": 10,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#E2E8F0"
+                                  },
                                   "layout": "vertical",
-                                  "gap": 4,
+                                  "gap": 6,
+                                  "padding": 14,
                                   "children": [
                                     {
                                       "type": "text",
-                                      "id": "SO1Il",
-                                      "fill": "$color-text-secondary",
-                                      "content": "Your answer",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "700"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "8puRo",
-                                      "fill": "$color-accent",
-                                      "content": "B",
-                                      "fontFamily": "Fraunces",
-                                      "fontSize": 24,
-                                      "fontWeight": "700"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "U6WUw",
-                                      "fill": "$color-text",
-                                      "textGrowth": "fixed-width",
-                                      "width": "fill_container",
-                                      "content": "5",
-                                      "lineHeight": 1.5,
+                                      "id": "89WXn",
+                                      "fill": "#10B981",
+                                      "content": "A - comma and and",
                                       "fontFamily": "DM Sans",
                                       "fontSize": 15,
+                                      "fontWeight": "700"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "HXecS",
+                                      "fill": "#475569",
+                                      "content": "Correct because two independent clauses can be joined with a comma and the coordinating conjunction and.",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 14,
                                       "fontWeight": "normal"
                                     }
                                   ]
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "SrDU9",
+                                  "id": "xdFwP",
+                                  "name": "wrongB",
                                   "width": "fill_container",
+                                  "fill": "#FFFFFF",
+                                  "cornerRadius": 10,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#E2E8F0"
+                                  },
                                   "layout": "vertical",
-                                  "gap": 4,
+                                  "gap": 6,
+                                  "padding": 14,
                                   "children": [
                                     {
                                       "type": "text",
-                                      "id": "9qYmH",
-                                      "fill": "$color-text-secondary",
-                                      "content": "Correct answer",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "700"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "BtQLR",
-                                      "fill": "$color-success",
-                                      "content": "A",
-                                      "fontFamily": "Fraunces",
-                                      "fontSize": 24,
-                                      "fontWeight": "700"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "peRq8",
-                                      "fill": "$color-text",
-                                      "textGrowth": "fixed-width",
-                                      "width": "fill_container",
-                                      "content": "3",
-                                      "lineHeight": 1.5,
+                                      "id": "UOSHi",
+                                      "fill": "#EF5350",
+                                      "content": "B - and only (your answer)",
                                       "fontFamily": "DM Sans",
                                       "fontSize": 15,
+                                      "fontWeight": "700"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "LhfFx",
+                                      "fill": "#475569",
+                                      "content": "Wrong because the conjunction alone does not stop the run-on. The sentence still needs punctuation between the two complete clauses.",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "pogzL",
+                                  "name": "wrongC",
+                                  "width": "fill_container",
+                                  "fill": "#FFFFFF",
+                                  "cornerRadius": 10,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#E2E8F0"
+                                  },
+                                  "layout": "vertical",
+                                  "gap": 6,
+                                  "padding": 14,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "QyFXf",
+                                      "fill": "#0F172A",
+                                      "content": "C - semicolon and and",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 15,
+                                      "fontWeight": "700"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "m1NzL",
+                                      "fill": "#475569",
+                                      "content": "Wrong because the semicolon already links the clauses, so adding and creates an unnecessary and incorrect structure.",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "q75tZ",
+                                  "name": "wrongD",
+                                  "width": "fill_container",
+                                  "fill": "#FFFFFF",
+                                  "cornerRadius": 10,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#E2E8F0"
+                                  },
+                                  "layout": "vertical",
+                                  "gap": 6,
+                                  "padding": 14,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "v14tv",
+                                      "fill": "#0F172A",
+                                      "content": "D - comma but",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 15,
+                                      "fontWeight": "700"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "r6Xkb",
+                                      "fill": "#475569",
+                                      "content": "Wrong because but changes the meaning. The sentence is continuing the same idea, not introducing a contrast.",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 14,
                                       "fontWeight": "normal"
                                     }
                                   ]
                                 }
                               ]
-                            },
-                            {
-                              "type": "text",
-                              "id": "uwqZp",
-                              "fill": "$color-text-secondary",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
-                              "content": "Why it was wrong: you isolated y correctly, but substituted the sign incorrectly in the second equation. Rechecking each answer choice against the solved pair would have ruled out B and confirmed A.",
-                              "lineHeight": 1.5,
-                              "fontFamily": "DM Sans",
-                              "fontSize": 15,
-                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -4444,111 +4324,196 @@
                         },
                         {
                           "type": "frame",
-                          "id": "lS6UC",
-                          "width": "fill_container",
-                          "fill": "$color-bg",
-                          "cornerRadius": "$radius-lg",
+                          "id": "WtWyF",
+                          "name": "expandedReview",
+                          "width": "fit_content(0)",
+                          "fill": "#F8FAFC",
+                          "cornerRadius": 12,
                           "layout": "vertical",
-                          "gap": 12,
+                          "gap": 16,
                           "padding": 18,
                           "children": [
                             {
                               "type": "frame",
-                              "id": "K8775",
+                              "id": "hjPNB",
+                              "name": "strongHeader",
                               "width": "fill_container",
-                              "gap": 16,
+                              "layout": "vertical",
+                              "gap": 8,
                               "children": [
                                 {
+                                  "type": "text",
+                                  "id": "wUDHF",
+                                  "fill": "#0F172A",
+                                  "content": "A system of equations is shown below. Which value of x satisfies both equations? 2x + y = 9 and x - y = 1.",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 15,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "p4vxh",
+                              "name": "strongAnswers",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 12,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "UWJ9h",
+                                  "fill": "#475569",
+                                  "content": "Answer choices and rationale",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 13,
+                                  "fontWeight": "700"
+                                },
+                                {
                                   "type": "frame",
-                                  "id": "ZjI9V",
+                                  "id": "XT4Uh",
+                                  "name": "strongA",
                                   "width": "fill_container",
+                                  "fill": "#FFFFFF",
+                                  "cornerRadius": 10,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#E2E8F0"
+                                  },
                                   "layout": "vertical",
-                                  "gap": 4,
+                                  "gap": 6,
+                                  "padding": 14,
                                   "children": [
                                     {
                                       "type": "text",
-                                      "id": "hfPPD",
-                                      "fill": "$color-text-secondary",
-                                      "content": "Your answer",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "700"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "KozQy",
-                                      "fill": "$color-success",
-                                      "content": "A",
-                                      "fontFamily": "Fraunces",
-                                      "fontSize": 24,
-                                      "fontWeight": "700"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "Aq0zw",
-                                      "fill": "$color-text",
-                                      "textGrowth": "fixed-width",
-                                      "width": "fill_container",
-                                      "content": "3",
-                                      "lineHeight": 1.5,
+                                      "id": "dkjC9",
+                                      "fill": "#10B981",
+                                      "content": "A - 3 (your answer and correct answer)",
                                       "fontFamily": "DM Sans",
                                       "fontSize": 15,
+                                      "fontWeight": "700"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "2h9dR",
+                                      "fill": "#475569",
+                                      "content": "Right because substituting x = 3 is the only option that satisfies both equations after solving for the same ordered pair.",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 14,
                                       "fontWeight": "normal"
                                     }
                                   ]
                                 },
                                 {
                                   "type": "frame",
-                                  "id": "hukvs",
+                                  "id": "WIJMs",
+                                  "name": "strongB",
                                   "width": "fill_container",
+                                  "fill": "#FFFFFF",
+                                  "cornerRadius": 10,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#E2E8F0"
+                                  },
                                   "layout": "vertical",
-                                  "gap": 4,
+                                  "gap": 6,
+                                  "padding": 14,
                                   "children": [
                                     {
                                       "type": "text",
-                                      "id": "mPxNR",
-                                      "fill": "$color-text-secondary",
-                                      "content": "Correct answer",
-                                      "fontFamily": "DM Sans",
-                                      "fontSize": 13,
-                                      "fontWeight": "700"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "r9CMo",
-                                      "fill": "$color-success",
-                                      "content": "A",
-                                      "fontFamily": "Fraunces",
-                                      "fontSize": 24,
-                                      "fontWeight": "700"
-                                    },
-                                    {
-                                      "type": "text",
-                                      "id": "t9xeo",
-                                      "fill": "$color-text",
-                                      "textGrowth": "fixed-width",
-                                      "width": "fill_container",
-                                      "content": "3",
-                                      "lineHeight": 1.5,
+                                      "id": "U8bDN",
+                                      "fill": "#0F172A",
+                                      "content": "B - 4",
                                       "fontFamily": "DM Sans",
                                       "fontSize": 15,
+                                      "fontWeight": "700"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "53oy7",
+                                      "fill": "#475569",
+                                      "content": "Wrong because x = 4 makes the two equations disagree once you solve for y, so it cannot satisfy the full system.",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "L4pef",
+                                  "name": "strongC",
+                                  "width": "fill_container",
+                                  "fill": "#FFFFFF",
+                                  "cornerRadius": 10,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#E2E8F0"
+                                  },
+                                  "layout": "vertical",
+                                  "gap": 6,
+                                  "padding": 14,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "Hgtp1",
+                                      "fill": "#0F172A",
+                                      "content": "C - 5",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 15,
+                                      "fontWeight": "700"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "hFWBB",
+                                      "fill": "#475569",
+                                      "content": "Wrong because substituting x = 5 produces incompatible y values across the two equations.",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "Od7zO",
+                                  "name": "strongD",
+                                  "width": "fill_container",
+                                  "fill": "#FFFFFF",
+                                  "cornerRadius": 10,
+                                  "stroke": {
+                                    "align": "inside",
+                                    "thickness": 1,
+                                    "fill": "#E2E8F0"
+                                  },
+                                  "layout": "vertical",
+                                  "gap": 6,
+                                  "padding": 14,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "7Am7s",
+                                      "fill": "#0F172A",
+                                      "content": "D - 6",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 15,
+                                      "fontWeight": "700"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "rVGpA",
+                                      "fill": "#475569",
+                                      "content": "Wrong because checking both equations rules this choice out. It does not produce a consistent solution pair.",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 14,
                                       "fontWeight": "normal"
                                     }
                                   ]
                                 }
                               ]
-                            },
-                            {
-                              "type": "text",
-                              "id": "A9gNc",
-                              "fill": "$color-text-secondary",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
-                              "content": "Why it was right: you balanced both equations correctly, found x = 3, and checked that the ordered pair satisfied both conditions. Matching the solved value back to the answer text confirms A.",
-                              "lineHeight": 1.5,
-                              "fontFamily": "DM Sans",
-                              "fontSize": 15,
-                              "fontWeight": "normal"
                             }
                           ]
                         },

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 const QUESTION_COUNT_OPTIONS = [10, 20, 50] as const;
 
@@ -8,40 +8,13 @@ type PracticeSetupFormProps = {
   defaultSubject?: "math" | "reading-writing";
 };
 
-const QUESTION_COUNT_COPY: Record<number, { title: string; label: string }> = {
-  10: { title: "10-question check-in", label: "Quick reset" },
-  20: { title: "20-question standard block", label: "Best default" },
-  50: { title: "50-question deep dive", label: "Max coverage" }
-};
-
-function getPreviewLabelClass(value: number) {
-  if (value === 20) {
-    return "setup-preview-label setup-preview-label-accent";
-  }
-
-  return "setup-preview-label setup-preview-label-primary";
-}
-
 export function PracticeSetupForm({
   defaultSubject = "math"
 }: PracticeSetupFormProps) {
   const [subject, setSubject] = useState<"math" | "reading-writing">(defaultSubject);
   const [questionCount, setQuestionCount] = useState<(typeof QUESTION_COUNT_OPTIONS)[number]>(20);
-
-  const summaryLine = useMemo(() => {
-    const focus = subject === "math" ? "Heart of Algebra" : "Central ideas";
-    return `${questionCount} questions • targets ${focus} • approved bank`;
-  }, [questionCount, subject]);
-
-  const previewRows = useMemo(
-    () =>
-      QUESTION_COUNT_OPTIONS.map((value) => ({
-        key: value,
-        title: QUESTION_COUNT_COPY[value].title,
-        label: QUESTION_COUNT_COPY[value].label
-      })),
-    []
-  );
+  const focus = subject === "math" ? "Heart of Algebra" : "Central ideas";
+  const summaryLine = `${questionCount} questions • targets ${focus} • approved bank`;
 
   return (
     <form action="/student/practice/setup/start" method="post" className="setup-grid">
@@ -124,30 +97,6 @@ export function PracticeSetupForm({
         <button className="button-primary setup-start-button" type="submit">
           Start practice session
         </button>
-      </article>
-
-      <article className="card setup-preview-card">
-        <h2 className="card-title">Question count preview</h2>
-        <p className="page-subtitle">
-          Students can choose a short 10-question check-in, a standard 20-question block, or a
-          deeper 50-question session.
-        </p>
-        <div className="inline-list setup-preview-list">
-          {previewRows.map((row) => (
-            <div className="inline-row" key={row.key}>
-              <span>{row.title}</span>
-              <strong className={getPreviewLabelClass(row.key)}>{row.label}</strong>
-            </div>
-          ))}
-        </div>
-      </article>
-
-      <article className="card setup-expect-card">
-        <h2 className="card-title">What to expect</h2>
-        <p className="page-subtitle">
-          Short sets keep momentum high, while longer sessions are grouped in results by question
-          review so follow-up stays scannable.
-        </p>
       </article>
     </form>
   );
