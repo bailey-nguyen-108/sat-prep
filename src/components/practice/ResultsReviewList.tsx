@@ -3,15 +3,20 @@
 import { useMemo, useState } from "react";
 import { ChevronDown } from "lucide-react";
 
+export type ReviewChoice = {
+  letter: string;
+  text: string;
+  rationale: string;
+  tone: "correct" | "selected-wrong" | "neutral";
+  labelSuffix?: string;
+};
+
 export type ReviewItem = {
   id: string;
   questionNumber: number;
   status: "Correct" | "Incorrect" | "Flagged" | "Unanswered";
-  studentAnswerLetter: string | null;
-  studentAnswerText: string | null;
-  correctAnswerLetter: string;
-  correctAnswerText: string;
-  explanationText: string;
+  prompt: string;
+  choices: ReviewChoice[];
 };
 
 export function ResultsReviewList({
@@ -60,21 +65,24 @@ export function ResultsReviewList({
 
             {isExpanded ? (
               <div className="review-item-body">
-                <div className="review-answer-grid">
-                  <div className="review-answer-block">
-                    <p className="review-answer-label">Your answer</p>
-                    <p className="review-answer-value">
-                      {item.studentAnswerLetter ? `${item.studentAnswerLetter} — ${item.studentAnswerText}` : "Unanswered"}
-                    </p>
-                  </div>
-                  <div className="review-answer-block">
-                    <p className="review-answer-label">Correct answer</p>
-                    <p className="review-answer-value review-answer-value-success">
-                      {item.correctAnswerLetter} — {item.correctAnswerText}
-                    </p>
-                  </div>
+                <div className="review-question-copy">
+                  <p className="review-question-prompt">{item.prompt}</p>
                 </div>
-                <p className="review-explanation">{item.explanationText}</p>
+                <div className="review-choice-list">
+                  <p className="review-choice-list-label">Answer choices and rationale</p>
+
+                  {item.choices.map((choice) => (
+                    <article className="review-choice-card" key={`${item.id}-${choice.letter}`}>
+                      <p
+                        className={`review-choice-title review-choice-title-${choice.tone}`}
+                      >
+                        {choice.letter} - {choice.text}
+                        {choice.labelSuffix ? ` ${choice.labelSuffix}` : ""}
+                      </p>
+                      <p className="review-choice-rationale">{choice.rationale}</p>
+                    </article>
+                  ))}
+                </div>
               </div>
             ) : null}
           </article>

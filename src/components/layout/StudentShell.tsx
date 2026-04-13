@@ -1,7 +1,7 @@
 import { AppSidebar } from "@/components/layout/AppSidebar";
 
 type StudentShellProps = {
-  activeTab: "home" | "practice" | "review" | "progress";
+  activeTab: "home" | "practice";
   children: React.ReactNode;
   pageClassName?: string;
 };

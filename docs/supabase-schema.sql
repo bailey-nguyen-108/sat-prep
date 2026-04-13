@@ -53,6 +53,14 @@ alter table public.questions enable row level security;
 alter table public.practice_sessions enable row level security;
 alter table public.practice_session_answers enable row level security;
 
+drop policy if exists "profiles are self readable" on public.profiles;
+drop policy if exists "students can read published questions" on public.questions;
+drop policy if exists "students can read own sessions" on public.practice_sessions;
+drop policy if exists "students can create own sessions" on public.practice_sessions;
+drop policy if exists "students can update own sessions" on public.practice_sessions;
+drop policy if exists "students can read own answers" on public.practice_session_answers;
+drop policy if exists "students can create own answers" on public.practice_session_answers;
+
 create policy "profiles are self readable" on public.profiles
 for select using (auth.uid() = id);
 

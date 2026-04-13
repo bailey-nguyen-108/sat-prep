@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "preview:verify": "bash scripts/preview-verify.sh",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "next lint"

@@ -2,7 +2,11 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { StudentShell } from "@/components/layout/StudentShell";
-import { ResultsReviewList, type ReviewItem } from "@/components/practice/ResultsReviewList";
+import {
+  ResultsReviewList,
+  type ReviewChoice,
+  type ReviewItem
+} from "@/components/practice/ResultsReviewList";
 import {
   findLatestSession,
   getAuthenticatedStudent,
@@ -57,10 +61,6 @@ export default async function SessionResultsPage({
 
   const reviewItems: ReviewItem[] = session.questions.map((question) => {
     const studentAnswerLetter = question.selected_choice;
-    const studentAnswerText = studentAnswerLetter
-      ? getChoiceText(question, studentAnswerLetter)
-      : null;
-    const correctAnswerText = getChoiceText(question, question.correct_choice);
     const flagged = flaggedQuestionIds.includes(question.id);
     const status = flagged
       ? "Flagged"
@@ -74,11 +74,8 @@ export default async function SessionResultsPage({
       id: question.id,
       questionNumber: question.position,
       status,
-      studentAnswerLetter,
-      studentAnswerText,
-      correctAnswerLetter: question.correct_choice,
-      correctAnswerText,
-      explanationText: question.explanation
+      prompt: question.prompt,
+      choices: buildReviewChoices(question, studentAnswerLetter)
     };
   });
 
@@ -87,7 +84,7 @@ export default async function SessionResultsPage({
     reviewItems.find((item) => item.status === "Flagged")?.id;
 
   return (
-    <StudentShell activeTab="review" pageClassName="screen-fade-in">
+    <StudentShell activeTab="practice" pageClassName="screen-fade-in">
       <div className="page-hero-copy results-hero-copy">
         <p className="stat-label results-eyebrow">Session complete</p>
         <h1 className="page-title page-title-xl">{pageTitle}</h1>
@@ -186,6 +183,87 @@ function getChoiceText(
   };
 
   return choiceMap[choice];
+}
+
+function buildReviewChoices(
+  question: {
+    choice_a: string;
+    choice_b: string;
+    choice_c: string;
+    choice_d: string;
+    correct_choice: AnswerChoice;
+    explanation: string;
+  },
+  studentAnswerLetter: AnswerChoice | null
+): ReviewChoice[] {
+  const choices: AnswerChoice[] = ["A", "B", "C", "D"];
+
+  return choices.map((choice) => {
+    const text = getChoiceText(question, choice);
+    const isCorrect = choice === question.correct_choice;
+    const isSelected = studentAnswerLetter === choice;
+    const tone = isCorrect ? "correct" : isSelected ? "selected-wrong" : "neutral";
+
+    return {
+      letter: choice,
+      text,
+      tone,
+      labelSuffix: getChoiceSuffix(isCorrect, isSelected),
+      rationale: buildChoiceRationale(question.explanation, question.correct_choice, tone)
+    };
+  });
+}
+
+function getChoiceSuffix(isCorrect: boolean, isSelected: boolean) {
+  if (isCorrect && isSelected) {
+    return "(your answer and correct answer)";
+  }
+
+  if (isCorrect) {
+    return "";
+  }
+
+  if (isSelected) {
+    return "(your answer)";
+  }
+
+  return "";
+}
+
+function buildChoiceRationale(
+  explanation: string,
+  correctChoice: AnswerChoice,
+  tone: ReviewChoice["tone"]
+) {
+  const normalizedExplanation = normalizeExplanation(explanation);
+
+  if (tone === "correct") {
+    return `Correct because ${normalizedExplanation}`;
+  }
+
+  if (tone === "selected-wrong") {
+    return `Wrong because this selected answer does not satisfy the prompt. The correct choice is ${correctChoice}, and ${normalizedExplanation}`;
+  }
+
+  return `Wrong because this answer choice does not fit the prompt as well as ${correctChoice}. ${capitalizeSentence(normalizedExplanation)}`;
+}
+
+function normalizeExplanation(explanation: string) {
+  const trimmed = explanation.trim();
+  if (!trimmed) {
+    return "the worked explanation supports a different answer choice.";
+  }
+
+  const withoutPeriod = trimmed.replace(/[.]+$/, "");
+  return withoutPeriod.charAt(0).toLowerCase() + withoutPeriod.slice(1);
+}
+
+function capitalizeSentence(sentence: string) {
+  if (!sentence) {
+    return sentence;
+  }
+
+  return sentence.charAt(0).toUpperCase() + sentence.slice(1);
 }
 
 function safeParseStringArray(value?: string) {

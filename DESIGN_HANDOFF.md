@@ -467,14 +467,28 @@ Expanded row must show:
 - all answer choices, not just the chosen answer and the correct answer
 - for each answer choice:
   - answer label / answer text
-  - explanation of why that specific answer is right or wrong
 - visual indication of:
   - student answer
   - correct answer
 
+Expanded answer choice color rules:
+- correct answer text line: green
+- wrongly selected student answer text line: coral red
+- all other answer text lines: default dark text
+
+Expanded answer choice labeling rules:
+- if the student selected the correct answer, append `(your answer and correct answer)` to that choice
+- if the student selected a wrong answer, append `(your answer)` to that wrong choice
+- do not hide the correct answer when the student answered incorrectly
+
+Expanded explanation rule:
+- show one explanation only for the correct answer
+- do not invent or display per-choice explanations for the wrong answer choices
+- if the student selected the wrong answer, still show the correct answer explanation under the correct answer row
+
 The review panel should be self-contained:
 - a student should be able to understand the original question without leaving the results screen
-- a student should be able to understand why each answer choice was wrong, not only why the correct answer was right
+- a student should be able to see which answer was right, which answer they selected, and why the right answer was correct
 - the expanded review panel should use full card width with readable answer blocks and generous spacing; do not compress the explanation layout into narrow columns
 
 Important:
@@ -568,11 +582,13 @@ Question review items should support:
 
 Every expanded question must have:
 - question identifier
-- student answer letter
-- student answer text
-- correct answer letter
-- correct answer text
-- explanation copy
+- question stem
+- all four answer choices
+- explanation copy under the correct answer only
+
+Sidebar footer card:
+- must remain fully visible at a normal `100%` desktop zoom level
+- do not pin it so low that the bottom edge is clipped on common laptop-height viewports
 
 ## 10. Non-Negotiables
 

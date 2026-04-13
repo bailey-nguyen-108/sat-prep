@@ -2,13 +2,11 @@ import React from "react";
 import Link from "next/link";
 import { BookOpenCheck, LogOut } from "lucide-react";
 
-type SidebarTab = "home" | "practice" | "review" | "progress";
+type SidebarTab = "home" | "practice";
 
 const navItems: Array<{ key: SidebarTab; label: string; href: string }> = [
   { key: "home", label: "Home", href: "/student/home" },
-  { key: "practice", label: "Practice", href: "/student/practice/setup" },
-  { key: "review", label: "Review", href: "/student/review/results" },
-  { key: "progress", label: "Progress", href: "/student/home" }
+  { key: "practice", label: "Practice", href: "/student/practice/setup" }
 ];
 
 export function AppSidebar({ activeTab }: { activeTab: SidebarTab }) {
