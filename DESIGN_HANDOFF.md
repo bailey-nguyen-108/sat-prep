@@ -41,6 +41,7 @@ Authenticated screens must render the same sidebar structure in this order:
 2. Nav
 3. Spacer
 4. Student footer card
+5. Logout action inside the student footer card
 
 Brand:
 - Icon: `book-open-check`
@@ -68,6 +69,10 @@ Student footer card:
 - Name: `Bailey Nguyen`
 - Meta: `Target 1400 • SAT in 19 days`
 - Pill: `7 day streak`
+- Logout action:
+  - label: `Log out`
+  - location: inside the footer card, below the streak pill
+  - behavior: signs the user out immediately and returns them to the auth flow
 
 ### 1.3 Typography
 
@@ -100,13 +105,26 @@ Use colors semantically:
 
 Current desktop student screens in scope:
 1. `Student Auth Desktop`
-2. `Student Home Desktop`
-3. `Practice Setup Desktop`
-4. `Practice Session Desktop`
-5. `Session Results Desktop`
-6. `Session Results Desktop — Strong Performance`
+2. `Student Sign Up Desktop`
+3. `Student Home Desktop`
+4. `Practice Setup Desktop`
+5. `Practice Session Desktop`
+6. `Session Results Desktop`
+7. `Session Results Desktop — Strong Performance`
 
 ## 3. Auth Screen
+
+Two auth routes should exist:
+- `/login`
+- `/signup`
+
+Both routes use the same split-auth shell.
+
+Login route:
+- `/login`
+
+Sign-up route:
+- `/signup`
 
 ### 3.1 Structure
 
@@ -138,6 +156,27 @@ Order:
 1. `Welcome back`
 2. Subcopy
 3. Email field
+
+### 3.4 Sign Up Variant
+
+The sign-up screen uses the same left-side hero structure and overall two-column composition as login.
+
+Right panel content order:
+1. `Create your student account`
+2. Sign-up subcopy
+3. Full name field
+4. Email field
+5. Password field
+6. Primary CTA: `Create account`
+7. Footer link: `Already have an account? Sign in instead.`
+
+Sign-up copy:
+- title: `Create your student account`
+- body: `Set up your profile and go straight into your first focused practice block.`
+
+Hero copy for sign-up variant:
+- title: `Build your score jump.`
+- body: `Create your account, start a targeted practice block, and review exactly what to fix next.`
 4. Password field
 5. `Keep me signed in` + `Forgot password?`
 6. Primary CTA

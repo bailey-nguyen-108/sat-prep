@@ -5,7 +5,7 @@ import { upsertStudentProfile } from "@/lib/student/repository";
 
 function redirectWithError(request: NextRequest, message: string) {
   return NextResponse.redirect(
-    new URL(`/login?error=${encodeURIComponent(message)}`, request.url),
+    new URL(`/signup?error=${encodeURIComponent(message)}`, request.url),
     { status: 303 }
   );
 }

@@ -152,6 +152,23 @@ input {
   padding: 10px 12px;
 }
 
+.sidebar-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 0;
+  cursor: pointer;
+}
+
+.sidebar-logout:hover {
+  color: white;
+}
+
 .page {
   padding: 40px;
   display: flex;
@@ -475,6 +492,8 @@ input {
   text-align: center;
   cursor: pointer;
   padding: 0;
+  display: inline-flex;
+  justify-content: center;
 }
 
 .field {
