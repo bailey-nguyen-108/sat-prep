@@ -730,10 +730,15 @@ input {
 
 .home-dashboard-card {
   min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .home-list {
   gap: 24px;
+  flex: 1;
+  justify-content: space-evenly;
 }
 
 .home-lower-grid {
@@ -741,7 +746,7 @@ input {
 }
 
 .home-list-compact {
-  gap: 22px;
+  gap: 0;
 }
 
 .metric-card-home {
