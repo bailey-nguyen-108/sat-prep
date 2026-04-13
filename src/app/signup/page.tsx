@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { BookOpenCheck } from "lucide-react";
 import { getAuthenticatedStudent } from "@/lib/student/repository";
 
-export default async function LoginPage({
+export default async function SignUpPage({
   searchParams
 }: {
   searchParams?: { error?: string };
@@ -28,20 +28,20 @@ export default async function LoginPage({
         </div>
 
         <div>
-          <h1 className="display-title">Practice smarter. Score higher.</h1>
+          <h1 className="display-title">Build your score jump.</h1>
           <p className="display-subtitle">
-            Target weak skills and build steady momentum for the SAT.
+            Create your account, start a targeted practice block, and review exactly what to fix next.
           </p>
         </div>
 
         <div className="auth-stats">
           <div className="auth-stat">
-            <p className="stat-value">84%</p>
-            <p className="stat-label">improve weak areas in 2 weeks</p>
+            <p className="stat-value">10</p>
+            <p className="stat-label">question check-ins to stay consistent</p>
           </div>
           <div className="auth-stat">
-            <p className="stat-value">12m</p>
-            <p className="stat-label">avg targeted review session</p>
+            <p className="stat-value">1</p>
+            <p className="stat-label">clear next step after every session</p>
           </div>
         </div>
       </section>
@@ -49,15 +49,27 @@ export default async function LoginPage({
       <section className="auth-panel">
         <div className="auth-card">
           <div>
-            <h2 className="card-title">Welcome back</h2>
+            <h2 className="card-title">Create your student account</h2>
             <p className="page-subtitle">
-              Pick up where you left off and start a focused practice block.
+              Set up your profile and go straight into your first focused practice block.
             </p>
           </div>
 
           {errorMessage ? <p className="error-banner">{errorMessage}</p> : null}
 
-          <form className="field-stack" method="post">
+          <form className="field-stack" method="post" action="/auth/sign-up">
+            <div className="field">
+              <label htmlFor="fullName">Full name</label>
+              <input
+                id="fullName"
+                name="fullName"
+                className="input"
+                type="text"
+                placeholder="Bailey Nguyen"
+                required
+              />
+            </div>
+
             <div className="field">
               <label htmlFor="email">Email</label>
               <input
@@ -65,34 +77,22 @@ export default async function LoginPage({
                 name="email"
                 className="input"
                 type="email"
-                defaultValue="student@school.edu"
                 placeholder="student@school.edu"
                 required
               />
             </div>
+
             <div className="field">
               <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                className="input"
-                defaultValue="practice123"
-                required
-              />
+              <input id="password" name="password" type="password" className="input" required />
             </div>
 
-            <div className="meta-row">
-              <span className="muted-copy">Keep me signed in</span>
-              <span className="muted-link">Forgot password?</span>
-            </div>
-
-            <button className="button-primary" formAction="/auth/sign-in">
-              Continue to dashboard
+            <button className="button-primary" type="submit">
+              Create account
             </button>
 
-            <Link className="auth-footer-action" href="/signup">
-              New here? Create a student account in under 60 seconds.
+            <Link className="auth-footer-action" href="/login">
+              Already have an account? Sign in instead.
             </Link>
           </form>
         </div>

@@ -186,8 +186,9 @@ If `sat-prep-webapp.pen` exists, treat it like a Figma spec.
 Before auditing coded screens:
 1. Read `DESIGN.md`
 2. Read `sat-prep-webapp.pen`
-3. Use the `.pen` file as the source of truth for layout, section order, content density, CTA placement, and navigation structure
-4. Review for parity first, polish second
+3. Capture or open the matching `.pen` screen reference before judging the live build
+4. Use the `.pen` file as the source of truth for layout, section order, content density, CTA placement, navigation structure, and visual states
+5. Review for parity first, polish second
 
 Priority order for this repo:
 1. `.pen` fidelity
@@ -195,6 +196,15 @@ Priority order for this repo:
 3. general visual polish
 
 Do not consider a screen "good" if it is visually polished but structurally different from `sat-prep-webapp.pen`.
+
+**Mandatory parity verification for this repo:**
+
+- For every reviewed student-facing screen, compare the live build against the matching `.pen` reference explicitly.
+- Before writing a finding, confirm the mismatch by looking at both:
+  - the live browser screenshot
+  - the `.pen` reference screenshot or exported screen
+- After each fix, re-check the live build against the same `.pen` reference before marking the finding as verified.
+- If you cannot access the relevant `.pen` reference, stop and report `BLOCKED` or `DONE_WITH_CONCERNS` rather than guessing.
 
 **Require clean working tree before starting:**
 
@@ -803,6 +813,10 @@ $B snapshot -D
 ```
 
 Take **before/after screenshot pair** for every fix.
+
+For this repo, a screenshot pair is not sufficient by itself. Re-compare the post-fix build to the matching
+`sat-prep-webapp.pen` reference and only mark the finding verified if the implementation now matches the approved
+screen composition and visual state.
 
 ### 8e. Classify
 

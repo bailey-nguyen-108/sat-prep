@@ -1,23 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
+import { formatSupabaseAuthError } from "@/lib/supabase/auth-error";
 import { createSupabaseRouteClient } from "@/lib/supabase/route";
 import { upsertStudentProfile } from "@/lib/student/repository";
 
 function redirectWithError(request: NextRequest, message: string) {
   return NextResponse.redirect(
-    new URL(`/login?error=${encodeURIComponent(message)}`, request.url),
+    new URL(`/signup?error=${encodeURIComponent(message)}`, request.url),
     { status: 303 }
   );
-}
-
-function formatError(error: unknown) {
-  const message = error instanceof Error ? error.message : "Unexpected sign-up error.";
-
-  if (message.toLowerCase().includes("could not find the table")) {
-    return "Run docs/supabase-schema.sql in the Supabase SQL editor, then try again.";
-  }
-
-  return message;
 }
 
 export async function POST(request: NextRequest) {
@@ -45,7 +36,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (error) {
-      return redirectWithError(request, error.message);
+      return redirectWithError(request, formatSupabaseAuthError(error, "Unexpected sign-up error."));
     }
 
     if (data.user) {
@@ -56,13 +47,16 @@ export async function POST(request: NextRequest) {
     const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
 
     if (signInError) {
-      return redirectWithError(request, signInError.message);
+      return redirectWithError(
+        request,
+        formatSupabaseAuthError(signInError, "Unexpected sign-up error.")
+      );
     }
 
     return applyCookies(
       NextResponse.redirect(new URL("/student/home", request.url), { status: 303 })
     );
   } catch (error) {
-    return redirectWithError(request, formatError(error));
+    return redirectWithError(request, formatSupabaseAuthError(error, "Unexpected sign-up error."));
   }
 }

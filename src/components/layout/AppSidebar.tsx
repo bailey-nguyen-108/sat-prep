@@ -1,14 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { BookOpenCheck } from "lucide-react";
+import { BookOpenCheck, LogOut } from "lucide-react";
 
-type SidebarTab = "home" | "practice" | "review" | "progress";
+type SidebarTab = "home" | "practice";
 
 const navItems: Array<{ key: SidebarTab; label: string; href: string }> = [
   { key: "home", label: "Home", href: "/student/home" },
-  { key: "practice", label: "Practice", href: "/student/practice/setup" },
-  { key: "review", label: "Review", href: "/student/review/results" },
-  { key: "progress", label: "Progress", href: "/student/home" }
+  { key: "practice", label: "Practice", href: "/student/practice/setup" }
 ];
 
 export function AppSidebar({ activeTab }: { activeTab: SidebarTab }) {
@@ -41,6 +39,12 @@ export function AppSidebar({ activeTab }: { activeTab: SidebarTab }) {
           <p className="sidebar-footer-meta">Target 1400 • SAT in 19 days</p>
         </div>
         <span className="sidebar-footer-pill">7 day streak</span>
+        <form action="/auth/sign-out" method="post">
+          <button className="sidebar-logout" type="submit">
+            <LogOut size={16} aria-hidden="true" />
+            <span>Log out</span>
+          </button>
+        </form>
       </div>
     </aside>
   );

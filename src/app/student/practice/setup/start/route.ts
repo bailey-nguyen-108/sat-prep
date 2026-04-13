@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseRouteClient } from "@/lib/supabase/route";
 import { createPracticeSession, upsertStudentProfile } from "@/lib/student/repository";
-import type { PracticeDifficulty, PracticeMode, PracticeSubject } from "@/lib/types/student";
+import type { PracticeDifficulty, PracticeSubject } from "@/lib/types/student";
 
 export async function POST(request: NextRequest) {
   const { supabase, applyCookies } = createSupabaseRouteClient(request);
@@ -16,14 +16,15 @@ export async function POST(request: NextRequest) {
   const profile = await upsertStudentProfile(user);
   const formData = await request.formData();
   const subject = String(formData.get("subject") ?? "math") as PracticeSubject;
-  const difficulty = String(formData.get("difficulty") ?? "medium") as PracticeDifficulty;
-  const mode = String(formData.get("mode") ?? "timed") as PracticeMode;
+  const difficulty = String(formData.get("difficulty") ?? "easy") as PracticeDifficulty;
+  const questionCount = Number(formData.get("questionCount") ?? 20);
 
   const sessionId = await createPracticeSession({
     userId: profile.id,
     subject,
     difficulty,
-    mode
+    mode: "timed",
+    questionCount
   });
 
   return applyCookies(

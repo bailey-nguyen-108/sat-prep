@@ -1,10 +1,22 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { Flag } from "lucide-react";
 import type { PracticeSessionDetail } from "@/lib/student/repository";
 import type { AnswerChoice } from "@/lib/types/student";
 
 const choiceKeys: AnswerChoice[] = ["A", "B", "C", "D"];
+
+function startViewTransition(callback: () => void) {
+  if (typeof document !== "undefined" && "startViewTransition" in document) {
+    (document as Document & { startViewTransition?: (cb: () => void) => void }).startViewTransition?.(
+      callback
+    );
+    return;
+  }
+
+  callback();
+}
 
 export function PracticeSessionClient({ session }: { session: PracticeSessionDetail }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -13,37 +25,66 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
       session.questions.map((question) => [question.id, question.selected_choice ?? undefined])
     )
   );
+  const [flaggedIds, setFlaggedIds] = useState<string[]>([]);
 
   const currentQuestion = session.questions[currentIndex];
-  const answeredCount = useMemo(
-    () => Object.values(answers).filter(Boolean).length,
-    [answers]
-  );
-  const flaggedCount = 0;
+  const answeredCount = useMemo(() => Object.values(answers).filter(Boolean).length, [answers]);
+  const flaggedCount = flaggedIds.length;
   const remainingCount = session.questions.length - answeredCount;
   const progressWidth = `${Math.round(((currentIndex + 1) / session.questions.length) * 100)}%`;
-  const timerValue = session.mode === "timed" ? "11:42" : "Focus mode";
+  const timerValue = "11:42";
+  const canGoBack = currentIndex > 0;
   const isLastQuestion = currentIndex === session.questions.length - 1;
+
+  function goToIndex(nextIndex: number) {
+    startViewTransition(() => {
+      setCurrentIndex(Math.max(0, Math.min(nextIndex, session.questions.length - 1)));
+    });
+  }
+
+  function handleChoiceSelect(choice: AnswerChoice) {
+    setAnswers((currentAnswers) => ({
+      ...currentAnswers,
+      [currentQuestion.id]: choice
+    }));
+    setFlaggedIds((currentFlags) => currentFlags.filter((id) => id !== currentQuestion.id));
+  }
+
+  function handleFlagForLater() {
+    setAnswers((currentAnswers) => ({
+      ...currentAnswers,
+      [currentQuestion.id]: undefined
+    }));
+    setFlaggedIds((currentFlags) =>
+      currentFlags.includes(currentQuestion.id)
+        ? currentFlags
+        : [...currentFlags, currentQuestion.id]
+    );
+
+    if (!isLastQuestion) {
+      goToIndex(currentIndex + 1);
+    }
+  }
+
+  const subjectEyebrow = session.subject === "math" ? "Math • Timed practice" : "Reading • Timed practice";
 
   return (
     <>
-      <div className="page-header">
-        <div className="page-hero-copy" style={{ width: "min(820px, 100%)" }}>
-          <p className="stat-label" style={{ color: "var(--color-primary)", marginBottom: 8 }}>
-            {session.subject === "math" ? "Math" : "Reading & Writing"} •{" "}
-            {session.mode === "timed" ? "Timed practice" : "Untimed practice"}
-          </p>
-          <h1 className="page-title">
+      <div className="page-header page-header-session">
+        <div className="page-hero-copy session-hero-copy">
+          <p className="stat-label session-eyebrow">{subjectEyebrow}</p>
+          <h1 className="page-title session-page-title">
             Question {currentIndex + 1} of {session.questions.length}
           </h1>
-          <div className="progress-track" style={{ margin: "18px 0 10px" }}>
+          <div className="progress-track session-progress-track">
             <div className="progress-fill" style={{ width: progressWidth }} />
           </div>
-          <p className="page-subtitle">
+          <p className="page-subtitle session-subtitle">
             You&apos;re on pace. Keep your focus on solving before checking choices.
           </p>
         </div>
-        <article className="card timer-card">
+
+        <article className="card timer-card timer-card-session">
           <p className="stat-label">Time remaining</p>
           <p className="stat-value">{timerValue}</p>
         </article>
@@ -51,65 +92,72 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
 
       <section className="session-layout">
         <article className="card question-card">
-          <p className="question-prompt">{currentQuestion.prompt}</p>
+          <div className="question-stage" key={currentQuestion.id}>
+            <p className="question-prompt">{currentQuestion.prompt}</p>
 
-          {choiceKeys.map((choiceKey) => {
-            const label =
-              currentQuestion[`choice_${choiceKey.toLowerCase() as "a" | "b" | "c" | "d"}`];
-            const active = answers[currentQuestion.id] === choiceKey;
+            <div className="choice-stack">
+              {choiceKeys.map((choiceKey) => {
+                const label =
+                  currentQuestion[`choice_${choiceKey.toLowerCase() as "a" | "b" | "c" | "d"}`];
+                const active = answers[currentQuestion.id] === choiceKey;
 
-            return (
-              <button
-                key={choiceKey}
-                className={`choice ${active ? "choice-active" : ""}`}
-                type="button"
-                onClick={() =>
-                  setAnswers((currentAnswers) => ({
-                    ...currentAnswers,
-                    [currentQuestion.id]: choiceKey
-                  }))
-                }
-              >
-                <span className={`choice-badge ${active ? "choice-badge-active" : ""}`}>
-                  {choiceKey}
-                </span>
-                <span className="choice-copy">{label}</span>
-              </button>
-            );
-          })}
+                return (
+                  <button
+                    key={choiceKey}
+                    className={`choice ${active ? "choice-active" : ""}`}
+                    type="button"
+                    onClick={() => handleChoiceSelect(choiceKey)}
+                  >
+                    <span className={`choice-badge ${active ? "choice-badge-active" : ""}`}>
+                      {choiceKey}
+                    </span>
+                    <span className="choice-copy">{label}</span>
+                  </button>
+                );
+              })}
+            </div>
 
-          <div className="session-hint">
-            <p className="page-subtitle" style={{ margin: 0 }}>
-              Tip: {currentQuestion.explanation.split(".")[0].replace(/^Because\s+/i, "")}.
-            </p>
+            <div className="session-hint">
+              <p className="page-subtitle session-hint-copy">
+                Tip: {currentQuestion.explanation.split(".")[0].replace(/^Because\\s+/i, "")}.
+              </p>
+            </div>
           </div>
         </article>
 
         <aside className="session-rail">
           <article className="card rail-card">
             <h2 className="card-title rail-title">Question navigator</h2>
-            <p className="page-subtitle">
+            <p className="page-subtitle rail-copy">
               Review flagged items after you finish this block.
             </p>
-            <div className="nav-badges nav-badges-grid" style={{ marginTop: 16 }}>
+            <div className="nav-badges nav-badges-grid nav-badges-session">
               {session.questions.map((question, index) => {
-                const isActive = index === currentIndex;
+                const isFlagged = flaggedIds.includes(question.id);
                 const isAnswered = Boolean(answers[question.id]);
+                const isCurrent = index === currentIndex;
 
                 return (
                   <button
                     key={question.id}
                     type="button"
-                    className={isActive ? "nav-badge-active" : "nav-badge"}
-                    onClick={() => setCurrentIndex(index)}
+                    className={[
+                      "nav-badge",
+                      isAnswered && !isFlagged ? "nav-badge-active" : "",
+                      isFlagged ? "nav-badge-flagged" : "",
+                      isCurrent ? "nav-badge-current" : ""
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
+                    onClick={() => goToIndex(index)}
                     aria-label={`Go to question ${index + 1}`}
                   >
-                    {isAnswered ? "•" : index + 1}
+                    {index + 1}
                   </button>
                 );
               })}
             </div>
-            <p className="stat-label" style={{ marginTop: 16 }}>
+            <p className="stat-label rail-summary-copy">
               {flaggedCount} flagged • {remainingCount} remaining
             </p>
             <div className="session-rail-snapshot">
@@ -134,26 +182,35 @@ export function PracticeSessionClient({ session }: { session: PracticeSessionDet
       <form action="/student/practice/session/submit" method="post" className="session-footer">
         <input type="hidden" name="sessionId" value={session.id} />
         <input type="hidden" name="answers" value={JSON.stringify(answers)} />
+        <input type="hidden" name="flaggedQuestionIds" value={JSON.stringify(flaggedIds)} />
+
         <button
-          className="button-secondary"
+          className="button-secondary session-footer-button"
           type="button"
-          onClick={() => setCurrentIndex((index) => Math.max(index - 1, 0))}
-          disabled={currentIndex === 0}
+          onClick={() => goToIndex(currentIndex - 1)}
+          disabled={!canGoBack}
         >
           Previous question
         </button>
 
+        <button
+          className="button-secondary session-flag-button"
+          type="button"
+          onClick={handleFlagForLater}
+        >
+          <Flag size={16} strokeWidth={2.25} />
+          <span>Flag for later</span>
+        </button>
+
         {isLastQuestion ? (
-          <button className="button-primary" type="submit">
+          <button className="button-primary session-footer-button" type="submit">
             Submit session
           </button>
         ) : (
           <button
-            className="button-primary"
+            className="button-primary session-footer-button"
             type="button"
-            onClick={() =>
-              setCurrentIndex((index) => Math.min(index + 1, session.questions.length - 1))
-            }
+            onClick={() => goToIndex(currentIndex + 1)}
           >
             Next question
           </button>

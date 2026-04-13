@@ -23,6 +23,7 @@ export async function POST(request: NextRequest) {
     string,
     AnswerChoice | undefined
   >;
+  const flaggedQuestionIds = JSON.parse(String(formData.get("flaggedQuestionIds") ?? "[]")) as string[];
 
   await completePracticeSession({
     sessionId,
@@ -30,9 +31,21 @@ export async function POST(request: NextRequest) {
     answers
   });
 
-  return applyCookies(
+  const response = applyCookies(
     NextResponse.redirect(new URL(`/student/review/results?session=${sessionId}`, request.url), {
       status: 303
     })
   );
+
+  response.cookies.set({
+    name: `sat-prep-flags-${sessionId}`,
+    value: JSON.stringify(flaggedQuestionIds),
+    path: "/",
+    httpOnly: false,
+    sameSite: "lax",
+    secure: request.nextUrl.protocol === "https:",
+    maxAge: 60 * 60 * 2
+  });
+
+  return response;
 }
